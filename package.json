@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "An app that does something, at least I think it does.",
   "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev src/index.ts"
+  },
   "author": "ragokan",
   "license": "MIT",
   "private": false,
