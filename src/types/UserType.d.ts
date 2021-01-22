@@ -1,11 +1,11 @@
 import { User } from "@prisma/client";
 
-enum UserRoleType {
+export enum UserRoleType {
   admin,
   user,
 }
 
-interface UserType {
+export interface UserType {
   id: number;
   name: string;
   email: string;

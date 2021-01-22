@@ -1,6 +1,6 @@
-// import AuthRoutes from "./routes/AuthRoutes.ts";
+import AuthRoutes from "./routes/AuthRoutes";
 import { Application } from "express";
 
 export default (app: Application) => {
-  //   app.use("/api/auth", AuthRoutes);
+    app.use("/api/auth", AuthRoutes);
 };

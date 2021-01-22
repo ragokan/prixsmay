@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { ErrorType } from "../types/ErrorType";
 import ErrorObject from "./ErrorObject";
 
 const ErrorHandler = (err: ErrorType, req: Request, res: Response, next: NextFunction) => {

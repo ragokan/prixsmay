@@ -8,6 +8,7 @@ import { NextFunction } from "express";
 import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
+import { ResponseJson } from "../../types/ResponseJsonType";
 
 interface ReqBody extends RequestContext {
   body: RegisterBodyType;
