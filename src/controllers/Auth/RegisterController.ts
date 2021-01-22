@@ -28,6 +28,6 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
   await SendEmail(user.email, await CreateConfirmationUrl(user.id));
 
   res.status(201).json(
-    InlineType<ResponseJson>({ message: "User is created successfully", success: true, user })
+    InlineType<ResponseJson>({ message: "User is created successfully!", success: true, user })
   );
 });
