@@ -90,6 +90,14 @@
   resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.9.tgz#4bd1fcac72eca8d5bec93e76c7fdcbdc1bc2cd4a"
   integrity sha512-zurD1ibz21BRlAOIKP8yhrxlqKx6L9VCwkB5kMiP6nZAhoF5MvC7qS1qPA7nRcr1GJolfkQC7/EAL4hdYejLtg==
 
+"@types/express-form-data@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@types/express-form-data/-/express-form-data-2.0.1.tgz#b381689c2ccb74159d5d90729d6f815615e2b7f3"
+  integrity sha512-xrt8PXbKNZFFsEXWQB5aDkbKQOIJrdmzP9n9gUp48ETReJyxhSpUpL70T5TPK7ATG5d5+sDrJHfOic5CYDJjvg==
+  dependencies:
+    "@types/connect" "*"
+    "@types/multiparty" "*"
+
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.18"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.18.tgz#8371e260f40e0e1ca0c116a9afcd9426fa094c40"
@@ -127,6 +135,13 @@
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.2.tgz#93e25bf9ee75fe0fd80b594bc4feb0e862111b5a"
   integrity sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==
+
+"@types/multiparty@*":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@types/multiparty/-/multiparty-0.0.32.tgz#99226df6050dae605fa6f9489d6c0b5ab61fdc00"
+  integrity sha512-zuQEcL9pHiW3u1fgkOWE6T/RwskrFZ3W63aKQPDs7EokIjtbsGL7aVlI4tI86qjL4B3hcFxDRtIGxwRwMTS2Dw==
+  dependencies:
+    "@types/node" "*"
 
 "@types/node@*", "@types/node@^14.14.22":
   version "14.14.22"
