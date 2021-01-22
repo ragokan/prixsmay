@@ -13,11 +13,12 @@ enum Role {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-  name     String
-  type     Role   @default(user)
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
+  password    String
+  name        String
+  type        Role    @default(user)
+  isActivated Boolean @default(false)
 
   // Utility
   createdAt DateTime @default(now())
