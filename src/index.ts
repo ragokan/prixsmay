@@ -26,10 +26,11 @@ dotenv.config();
         store: new RedisStore({
           client: redis,
         }),
-        name: process.env.sessionName,
+        name: "qid",
         secret: process.env.sessionSecret as string,
         resave: true,
         saveUninitialized: false,
+        rolling: true,
         cookie: {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
