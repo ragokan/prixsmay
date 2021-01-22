@@ -22,6 +22,7 @@
     "ioredis": "^4.19.4",
     "joi": "^17.3.0",
     "joi-objectid": "^3.0.1",
+    "lodash": "^4.17.20",
     "nodemailer": "^6.4.17",
     "reflect-metadata": "^0.1.13",
     "uuid": "^8.3.2"
@@ -35,6 +36,7 @@
     "@types/express-form-data": "^2.0.1",
     "@types/express-session": "^1.17.3",
     "@types/ioredis": "^4.19.2",
+    "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.22",
     "@types/nodemailer": "^6.4.0",
     "@types/uuid": "^8.3.0",

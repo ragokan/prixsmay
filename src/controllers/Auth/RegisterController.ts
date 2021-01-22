@@ -9,6 +9,7 @@ import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
 import { ResponseJson } from "../../types/ResponseJsonType";
+import _ from "lodash";
 
 interface ReqBody extends RequestContext {
   body: RegisterBodyType;
@@ -23,11 +24,17 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
 
   const password = await bcrypt.hash(req.body.password, 11);
 
-  const user = await User.create({ data: { ...req.body, password }, select: { id: true, email: true, name: true } });
+  let user = await User.create({ data: { ...req.body, password } });
 
   await SendEmail(user.email, await CreateConfirmationUrl(user.id));
 
+  const filteredUser = _.omit(user, ["type", "password"]);
+
   res.status(201).json(
-    InlineType<ResponseJson>({ message: "User is created successfully!", success: true, user })
+    InlineType<ResponseJson>({
+      message: "User is created successfully!",
+      success: true,
+      user: filteredUser,
+    })
   );
 });
