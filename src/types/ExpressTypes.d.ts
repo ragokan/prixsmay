@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { UserType } from "./UserType";
 
 export type RequestContext = Request & {
   session: {
@@ -14,9 +13,3 @@ export type ResponseContext = Response & {
   };
   user: UserType;
 };
-
-// interface ReqBody extends RequestContext {
-//   body: {
-//     name: string;
-//   };
-// }

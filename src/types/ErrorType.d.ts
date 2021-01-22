@@ -1,4 +1,4 @@
-export interface ErrorType {
+interface ErrorType {
   message: string;
   statusCode: number;
 }

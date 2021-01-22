@@ -1,10 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { ErrorType } from "../types/ErrorType";
 import ErrorObject from "./ErrorObject";
 
 const ErrorHandler = (err: ErrorType, req: Request, res: Response, next: NextFunction) => {
   console.log(err.message);
-
   res.status(err.statusCode || 500);
   res.json({
     message: err.message || "Server Error",
