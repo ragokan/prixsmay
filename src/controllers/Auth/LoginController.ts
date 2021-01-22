@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
 import { ResponseJson } from "../../types/ResponseJsonType";
 import { LoginBodyType, LoginValidation } from "../../validation/LoginValidation";
+import _ from "lodash";
 
 interface ReqBody extends RequestContext {
   body: LoginBodyType;
@@ -26,8 +27,9 @@ export const LoginFunction = Async(async (req: ReqBody, res: ResponseContext, ne
   if (!user.isActivated) return next(new ErrorObject("Please activate your email!", 400));
 
   req.session.userId = user.id;
+  const filteredUser = _.omit(user, ["password", "isActivated"]);
 
   res.status(201).json(
-    InlineType<ResponseJson>({ message: "User is logged in successfully!", success: true })
+    InlineType<ResponseJson>({ message: "User is logged in successfully!", success: true, user: filteredUser })
   );
 });
