@@ -44,6 +44,7 @@
     "@types/faker": "^5.1.5",
     "@types/ioredis": "^4.19.2",
     "@types/jest": "^26.0.20",
+    "@types/keygrip": "^1.0.2",
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.22",
     "@types/node-fetch": "^2.5.8",

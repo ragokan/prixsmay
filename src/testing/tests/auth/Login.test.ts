@@ -13,12 +13,11 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await server.close((err: any) => {
-    if (err) console.log(err);
-    console.log("Server is closed successfully!");
+    if (err) return console.log(err);
   });
 });
 
-describe("Register", () => {
+describe("Login", () => {
   const user = CreateFakeUser();
   let dbUser: TestUserType;
 
@@ -38,6 +37,7 @@ describe("Register", () => {
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
     });
+
     const response = await responseData.json();
 
     expect(responseData.status).toBe(200);
