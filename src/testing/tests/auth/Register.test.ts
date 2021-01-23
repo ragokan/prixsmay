@@ -1,8 +1,8 @@
-import faker from "faker";
-import { prisma } from "../../database";
+import { prisma } from "../../../database";
 import fetch from "node-fetch";
-import { testUrl } from "../utils/TestConstants";
-import { StartTest } from "../utils/StartTest";
+import { testUrl } from "../../utils/TestConstants";
+import { StartTest } from "../../utils/StartTest";
+import { CreateFakeUser } from "../../utils/CreateFakeUser";
 
 beforeAll(async () => {
   await StartTest();
@@ -13,11 +13,8 @@ afterAll(async () => {
 });
 
 describe("Register", () => {
-  const user = {
-    name: faker.name.firstName(),
-    email: faker.internet.email(),
-    password: faker.internet.password(),
-  };
+  const user = CreateFakeUser();
+
   it("create user", async () => {
     const responseData = await fetch(testUrl + "auth/register", {
       method: "POST",
