@@ -36,7 +36,7 @@ export const SendPasswordResetMailFunction = Async(
         "Please click here to reset your password."
       );
 
-    res.status(201).json(
+    res.status(200).json(
       InlineType<ResponseJson>({ message: "Mail is sent successfully!", success: true })
     );
   }
@@ -62,7 +62,7 @@ export const ResetPasswordFunction = Async(async (req: ReqBodyPassword, res: Res
 
   redis.del(forgotPasswordConstant + token);
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<ResponseJson>({ message: "Password is resetted successfully!", success: true })
   );
 });

@@ -29,7 +29,7 @@ export const LoginFunction = Async(async (req: ReqBody, res: ResponseContext, ne
   req.session.userId = user.id;
   const filteredUser = _.omit(user, ["password", "isActivated"]);
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<ResponseJson>({ message: "User is logged in successfully!", success: true, user: filteredUser })
   );
 });

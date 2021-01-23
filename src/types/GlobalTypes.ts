@@ -12,6 +12,7 @@ declare global {
       redisHost: string;
       redisPort: number;
       redisPassword: string;
+      frontendUrl: string;
     }
   }
 }

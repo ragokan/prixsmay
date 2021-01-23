@@ -28,7 +28,7 @@ export const ConfirmEmailFunction = Async(async (req: ReqBody, res: ResponseCont
 
   redis.del(confirmMailConstant + token);
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<ResponseJson>({ message: "User is confirmed successfully!", success: true })
   );
 });
