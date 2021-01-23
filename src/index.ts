@@ -1,12 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config();
 import { ErrorHandler, NotFound } from "./utils/ErrorHandler";
 import formData from "express-form-data";
 import { prisma } from "./database";
 import routing from "./routing";
 import session from "./session";
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
-dotenv.config();
 
 (async () => {
   try {

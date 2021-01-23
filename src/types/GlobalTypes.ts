@@ -9,6 +9,7 @@ declare global {
       mailerTitle: string;
       mailResetUrl: string;
       DATABASE_URL: string;
+      TEST_DATABASE_URL: string;
       redisHost: string;
       redisPort: number;
       redisPassword: string;

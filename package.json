@@ -7,7 +7,10 @@
     "start": "node dist/src/index.js",
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "db:push": "prisma db push --preview-feature",
+    "db:migrate": "prisma migrate dev --preview-feature",
+    "db:update": "prisma generate"
   },
   "author": "ragokan",
   "license": "MIT",
