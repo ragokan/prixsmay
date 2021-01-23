@@ -6,7 +6,7 @@
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
     "sourceMap": true,
     "declaration": true,
-    "outDir": "./dir",
+    "outDir": "./dist",
     "rootDir": "./",
     "removeComments": true,
     "strict": false,

@@ -10,7 +10,7 @@ const noPermissionError = (next: NextFunction) =>
 const LoginRequired = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
   if (!req.session.userId) return noPermissionError(next);
 
-  req.user = { id: req.session.userId };
+  req.user.id = req.session.userId;
 
   next();
 });

@@ -7,7 +7,7 @@ import { ResponseJson } from "../../types/ResponseJsonType";
 
 export const LogoutFunction = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
   req.session.destroy((err) => {
-    if (err) return next(new ErrorObject(`Error : ${err}`, 400));
+    if (err) return next(new ErrorObject(`Error: ${err}`, 400));
   });
 
   res
