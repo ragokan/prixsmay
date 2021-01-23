@@ -4,7 +4,7 @@
   "description": "An app that does something, at least I think it does.",
   "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node dist/src/index.js",
+    "start": "node dist/src/index.js",
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
     "heroku-postbuild": "npm run build"
