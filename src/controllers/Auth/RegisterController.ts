@@ -26,7 +26,7 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
 
   let user = await User.create({ data: { ...req.body, password } });
 
-  await SendEmail(user.email, await CreateConfirmationUrl(user.id));
+  if (!process.env.testMode) await SendEmail(user.email, await CreateConfirmationUrl(user.id));
 
   const filteredUser = _.omit(user, ["type", "password"]);
 

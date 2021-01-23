@@ -14,6 +14,7 @@ declare global {
       redisPort: number;
       redisPassword: string;
       frontendUrl: string;
+      testMode: string;
     }
   }
 }

@@ -7,9 +7,11 @@ export default (app: Application) => {
   const RedisStore = connectRedis(session);
   app.use(
     session({
-      store: new RedisStore({
-        client: redis,
-      }),
+      store: process.env.testMode
+        ? undefined
+        : new RedisStore({
+            client: redis,
+          }),
       name: "qid",
       secret: process.env.sessionSecret as string,
       resave: true,
