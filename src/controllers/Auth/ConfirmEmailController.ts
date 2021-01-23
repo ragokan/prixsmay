@@ -24,6 +24,8 @@ export const ConfirmEmailFunction = Async(async (req: ReqBody, res: ResponseCont
   const user = await User.update({ where: { id: parseInt(id) }, data: { isActivated: true } });
   if (!user) return next(new ErrorObject("User doesnt exists!", 404));
 
+  req.session.userId = user.id;
+
   redis.del(confirmMailConstant + token);
 
   res.status(201).json(

@@ -1,13 +1,12 @@
 export enum UserRoleType {
-  admin,
-  user,
+  user = "user",
+  admin = "admin",
 }
 
 export interface UserType {
   id: number;
   name: string;
   email: string;
-  password: string;
   type: UserRoleType;
   isActivated: boolean;
   //   createdAt: Date;

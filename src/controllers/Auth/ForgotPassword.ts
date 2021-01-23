@@ -56,7 +56,9 @@ export const ResetPasswordFunction = Async(async (req: ReqBodyPassword, res: Res
   if (!userId) return next(new ErrorObject("The token is not valid anymore!", 400));
 
   const hashedPassword = await bcrypt.hash(password, 12);
-  await User.update({ where: { id: parseInt(userId) }, data: { password: hashedPassword } });
+  const user = await User.update({ where: { id: parseInt(userId) }, data: { password: hashedPassword } });
+
+  req.session.userId = user.id;
 
   redis.del(forgotPasswordConstant + token);
 
