@@ -6,7 +6,6 @@ import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
 import { ResponseJson } from "../../types/ResponseJsonType";
-import _ from "lodash";
 import {
   PasswordResetBodyType,
   PasswordResetValidation,
