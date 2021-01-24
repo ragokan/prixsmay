@@ -2,9 +2,9 @@ import { prisma } from "../../../database";
 import fetch from "node-fetch";
 import { testUrl } from "../../utils/TestConstants";
 import { StartTest } from "../../utils/StartTest";
-import { CreateFakeUser } from "../../utils/CreateFakeUser";
-import bcrypt from "bcryptjs";
+import { TestAccount } from "../../utils/TestAccount";
 import { TestUserType } from "../../utils/types/TestUserType";
+import { times } from "lodash";
 
 let server: any;
 beforeAll(async () => {
@@ -18,12 +18,11 @@ afterAll(async () => {
 });
 
 describe("Login", () => {
-  const user = CreateFakeUser();
-  let dbUser: TestUserType;
+  let user = TestAccount;
+  let dbUser: any;
 
-  it("create user", async () => {
-    const hashedPass = await bcrypt.hash(user.password, 12);
-    dbUser = await prisma.user.create({ data: { ...user, isActivated: true, password: hashedPass } });
+  it("get user", async () => {
+    dbUser = await prisma.user.findUnique({ where: { email: user.email } });
   });
 
   it("login user", async () => {
@@ -52,12 +51,5 @@ describe("Login", () => {
         type: "user",
       },
     });
-  });
-  it("delete user", async () => {
-    await prisma.user.delete({ where: { email: user.email } });
-
-    const dbUser = await prisma.user.findUnique({ where: { email: user.email } });
-
-    expect(dbUser).toBeNull();
   });
 });
