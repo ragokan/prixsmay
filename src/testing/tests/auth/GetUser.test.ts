@@ -2,9 +2,8 @@ import { prisma } from "../../../database";
 import fetch from "node-fetch";
 import { testUrl } from "../../utils/TestConstants";
 import { StartTest } from "../../utils/StartTest";
-import { CreateFakeUser } from "../../utils/CreateFakeUser";
-import { TestUserType } from "../../utils/types/TestUserType";
 import { TestAccount } from "../../utils/TestAccount";
+// import bcrypt from "bcryptjs";
 
 let server: any;
 beforeAll(async () => {
@@ -23,6 +22,8 @@ describe("Get User", () => {
   let cookie: any;
 
   it("find user", async () => {
+    // const pass = await bcrypt.hash(TestAccount.password, 12);
+    // await prisma.user.create({ data: { ...TestAccount, password: pass, isActivated: true } });
     dbUser = await prisma.user.findUnique({ where: { email: user.email } });
   });
 

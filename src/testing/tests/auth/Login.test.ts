@@ -3,8 +3,6 @@ import fetch from "node-fetch";
 import { testUrl } from "../../utils/TestConstants";
 import { StartTest } from "../../utils/StartTest";
 import { TestAccount } from "../../utils/TestAccount";
-import { TestUserType } from "../../utils/types/TestUserType";
-import { times } from "lodash";
 
 let server: any;
 beforeAll(async () => {
