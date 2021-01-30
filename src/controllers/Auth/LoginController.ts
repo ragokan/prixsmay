@@ -5,7 +5,7 @@ import { NextFunction } from "express";
 import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
-import { IResponse } from "../../types/IResponse";
+import { IResponse } from "../../types/ResponseType";
 import { LoginBodyType, LoginValidation } from "../../validation/LoginValidation";
 import _ from "lodash";
 

@@ -1,4 +1,4 @@
-export enum EUserRole {
+export enum UserRole {
   user = "user",
   admin = "admin",
 }
@@ -7,7 +7,7 @@ export interface IUser {
   id: number;
   name: string;
   email: string;
-  type: EUserRole;
+  type: UserRole;
   isActivated: boolean;
   //   createdAt: Date;
   //   updatedAt: Date;

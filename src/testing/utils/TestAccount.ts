@@ -1,4 +1,4 @@
-import { ITestUser } from "./types/ITestUser";
+import { ITestUser } from "./types/TestUserType";
 
 export const TestAccount: ITestUser = {
   email: "testuser@test.com",

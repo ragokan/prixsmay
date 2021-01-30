@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { IError } from "../types/IError";
-import { IResponse } from "../types/IResponse";
+import { IError } from "../types/ErrorType";
+import { IResponse } from "../types/ResponseType";
 import ErrorObject from "./ErrorObject";
 import { InlineType } from "./InlineType";
 

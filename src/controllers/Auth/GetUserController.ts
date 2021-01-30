@@ -2,7 +2,7 @@ import { RequestContext, ResponseContext } from "../../types/ExpressTypes";
 import Async from "../../middleware/Async";
 import { NextFunction } from "express";
 import { InlineType } from "../../utils/InlineType";
-import { IResponse } from "../../types/IResponse";
+import { IResponse } from "../../types/ResponseType";
 import _ from "lodash";
 
 export const GetUserFunction = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
