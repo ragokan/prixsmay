@@ -5,7 +5,7 @@ import { NextFunction } from "express";
 import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
-import { ResponseJson } from "../../types/ResponseJsonType";
+import { IResponse } from "../../types/IResponse";
 import {
   PasswordResetBodyType,
   PasswordResetValidation,
@@ -37,7 +37,7 @@ export const SendPasswordResetMailFunction = Async(
       );
 
     res.status(200).json(
-      InlineType<ResponseJson>({ message: "Mail is sent successfully!", success: true })
+      InlineType<IResponse>({ message: "Mail is sent successfully!", success: true })
     );
   }
 );
@@ -63,6 +63,6 @@ export const ResetPasswordFunction = Async(async (req: ReqBodyPassword, res: Res
   redis.del(forgotPasswordConstant + token);
 
   res.status(200).json(
-    InlineType<ResponseJson>({ message: "Password is resetted successfully!", success: true })
+    InlineType<IResponse>({ message: "Password is resetted successfully!", success: true })
   );
 });

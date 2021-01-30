@@ -1,13 +1,13 @@
-export enum UserRoleType {
+export enum EUserRole {
   user = "user",
   admin = "admin",
 }
 
-export interface UserType {
+export interface IUser {
   id: number;
   name: string;
   email: string;
-  type: UserRoleType;
+  type: EUserRole;
   isActivated: boolean;
   //   createdAt: Date;
   //   updatedAt: Date;

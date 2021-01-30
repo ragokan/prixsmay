@@ -3,7 +3,7 @@ import ErrorObject from "../../utils/ErrorObject";
 import Async from "../../middleware/Async";
 import { NextFunction } from "express";
 import { InlineType } from "../../utils/InlineType";
-import { ResponseJson } from "../../types/ResponseJsonType";
+import { IResponse } from "../../types/IResponse";
 
 export const LogoutFunction = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
   req.session.destroy((err) => {
@@ -14,6 +14,6 @@ export const LogoutFunction = Async(async (req: RequestContext, res: ResponseCon
     .status(201)
     .clearCookie("qid")
     .json(
-      InlineType<ResponseJson>({ message: "User is logged out successfully!", success: true })
+      InlineType<IResponse>({ message: "User is logged out successfully!", success: true })
     );
 });

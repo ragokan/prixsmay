@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
-import { ErrorType } from "../types/ErrorType";
-import { ResponseJson } from "../types/ResponseJsonType";
+import { IError } from "../types/IError";
+import { IResponse } from "../types/IResponse";
 import ErrorObject from "./ErrorObject";
 import { InlineType } from "./InlineType";
 
-const ErrorHandler = (err: ErrorType, _: Request, res: Response, __: NextFunction) => {
+const ErrorHandler = (err: IError, _: Request, res: Response, __: NextFunction) => {
   res.status(err.statusCode || 500);
   res.json(
-    InlineType<ResponseJson>({
+    InlineType<IResponse>({
       message: err.message || "Server Error",
       success: false,
     })

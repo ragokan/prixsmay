@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { UserType } from "./UserType";
+import { IUser } from "./IUser";
 
 export type RequestContext = Request & {
   session: {
     userId?: number;
   };
-  user: UserType;
+  user: IUser;
 };
 
 export type ResponseContext = Response & {
   session: {
     userId?: number;
   };
-  user: UserType;
+  user: IUser;
 };

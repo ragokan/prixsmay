@@ -4,7 +4,7 @@ import Async from "../../middleware/Async";
 import { NextFunction } from "express";
 import { User } from "../../database";
 import { InlineType } from "../../utils/InlineType";
-import { ResponseJson } from "../../types/ResponseJsonType";
+import { IResponse } from "../../types/IResponse";
 import { redis } from "../../redis";
 import { confirmMailConstant } from "../../constants/RedisConstants";
 
@@ -29,6 +29,6 @@ export const ConfirmEmailFunction = Async(async (req: ReqBody, res: ResponseCont
   redis.del(confirmMailConstant + token);
 
   res.status(200).json(
-    InlineType<ResponseJson>({ message: "User is confirmed successfully!", success: true })
+    InlineType<IResponse>({ message: "User is confirmed successfully!", success: true })
   );
 });

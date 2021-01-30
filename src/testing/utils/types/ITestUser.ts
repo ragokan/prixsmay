@@ -1,4 +1,4 @@
-export interface TestUserType {
+export interface ITestUser {
   id?: number;
   name: string;
   email: string;

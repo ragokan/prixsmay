@@ -8,7 +8,7 @@ import { NextFunction } from "express";
 import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
-import { ResponseJson } from "../../types/ResponseJsonType";
+import { IResponse } from "../../types/IResponse";
 import _ from "lodash";
 
 interface ReqBody extends RequestContext {
@@ -31,7 +31,7 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
   const filteredUser = _.omit(user, ["type", "password"]);
 
   res.status(201).json(
-    InlineType<ResponseJson>({
+    InlineType<IResponse>({
       message: "User is created successfully!",
       success: true,
       user: filteredUser,

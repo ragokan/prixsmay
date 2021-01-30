@@ -1,7 +1,7 @@
 import faker from "faker";
-import { TestUserType } from "./types/TestUserType";
+import { ITestUser } from "./types/ITestUser";
 
-export const CreateFakeUser = (): TestUserType => ({
+export const CreateFakeUser = (): ITestUser => ({
   name: faker.name.firstName(),
   email: faker.internet.email(),
   password: faker.internet.password(),

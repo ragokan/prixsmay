@@ -5,7 +5,7 @@ import { NextFunction } from "express";
 import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
-import { ResponseJson } from "../../types/ResponseJsonType";
+import { IResponse } from "../../types/IResponse";
 import { LoginBodyType, LoginValidation } from "../../validation/LoginValidation";
 import _ from "lodash";
 
@@ -30,6 +30,6 @@ export const LoginFunction = Async(async (req: ReqBody, res: ResponseContext, ne
   const filteredUser = _.omit(user, ["password", "isActivated"]);
 
   res.status(200).json(
-    InlineType<ResponseJson>({ message: "User is logged in successfully!", success: true, user: filteredUser })
+    InlineType<IResponse>({ message: "User is logged in successfully!", success: true, user: filteredUser })
   );
 });
