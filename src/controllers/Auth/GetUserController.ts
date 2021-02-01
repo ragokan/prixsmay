@@ -3,10 +3,10 @@ import Async from "../../middleware/Async";
 import { NextFunction } from "express";
 import { InlineType } from "../../utils/InlineType";
 import { IUserResponse } from "../../types/ResponseType";
-import _ from "lodash";
+import { omit } from "lodash";
 
 export const GetUserFunction = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
-  const filteredUser = _.omit(req.user, ["password", "isActivated"]);
+  const filteredUser = omit(req.user, ["password", "isActivated"]);
 
   res.status(200).json(
     InlineType<IUserResponse>({ message: "User info is received successfully!", success: true, user: filteredUser })

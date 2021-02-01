@@ -9,7 +9,7 @@ import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
 import { IUserResponse } from "../../types/ResponseType";
-import _ from "lodash";
+import { omit } from "lodash";
 
 interface ReqBody extends RequestContext {
   body: RegisterBodyType;
@@ -28,7 +28,7 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
 
   if (!process.env.testMode) await SendEmail(user.email, await CreateConfirmationUrl(user.id));
 
-  const filteredUser = _.omit(user, ["type", "password"]);
+  const filteredUser = omit(user, ["type", "password"]);
 
   res.status(201).json(
     InlineType<IUserResponse>({
