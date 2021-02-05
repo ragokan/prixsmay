@@ -5,7 +5,7 @@ export interface IPost {
   title: string;
   content: string;
   authorId: number;
-  votes: IVote[];
+  votes?: IVote[];
 
   createdAt: Date;
   updatedAt: Date;

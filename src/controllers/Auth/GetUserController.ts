@@ -2,7 +2,7 @@ import { RequestContext, ResponseContext } from "../../types/ExpressTypes";
 import Async from "../../middleware/Async";
 import { NextFunction } from "express";
 import { InlineType } from "../../utils/InlineType";
-import { IUserResponse } from "../../types/ResponseType";
+import { IUserResponse } from "../../types/ResponseTypes";
 import { omit } from "lodash";
 import { User } from "../../database";
 

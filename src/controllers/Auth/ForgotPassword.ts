@@ -5,7 +5,7 @@ import { NextFunction } from "express";
 import { User } from "../../database";
 import bcrypt from "bcryptjs";
 import { InlineType } from "../../utils/InlineType";
-import { IResponse } from "../../types/ResponseType";
+import { IResponse } from "../../types/ResponseTypes";
 import {
   PasswordResetBodyType,
   PasswordResetValidation,

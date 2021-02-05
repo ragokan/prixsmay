@@ -3,7 +3,7 @@ import ErrorObject from "../../utils/ErrorObject";
 import Async from "../../middleware/Async";
 import { NextFunction } from "express";
 import { InlineType } from "../../utils/InlineType";
-import { IResponse } from "../../types/ResponseType";
+import { IResponse } from "../../types/ResponseTypes";
 
 export const LogoutFunction = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
   req.session.destroy((err) => {

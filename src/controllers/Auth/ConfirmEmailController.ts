@@ -4,7 +4,7 @@ import Async from "../../middleware/Async";
 import { NextFunction } from "express";
 import { User } from "../../database";
 import { InlineType } from "../../utils/InlineType";
-import { IResponse } from "../../types/ResponseType";
+import { IResponse } from "../../types/ResponseTypes";
 import { redis } from "../../redis";
 import { confirmMailConstant } from "../../constants/RedisConstants";
 
