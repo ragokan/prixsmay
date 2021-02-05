@@ -17,6 +17,6 @@ export const CreatePostFunction = Async(async (req: ReqBody, res: ResponseContex
   });
 
   res.status(200).json(
-    InlineType<IPostResponse>({ message: "User info is received successfully!", success: true, post })
+    InlineType<IPostResponse>({ message: "Post is created successfully!", success: true, post })
   );
 });
