@@ -10,10 +10,10 @@ interface ReqBody extends RequestContext {
   body: PostBodyType;
 }
 
-export const CreatePostFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
+export const CreatePostFunction = Async(async (req: ReqBody, res: ResponseContext, _: NextFunction) => {
   const post = await Post.create({
     data: { ...req.body, authorId: req.session.userId! },
-    include: { author: { select: { email: true, id: true } } },
+    include: { author: { select: { email: true, id: true, name: true } } },
   });
 
   res.status(200).json(
