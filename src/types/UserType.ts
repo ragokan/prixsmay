@@ -1,3 +1,5 @@
+import { IPost } from "./PostType";
+
 export enum UserRole {
   user = "user",
   admin = "admin",
@@ -5,10 +7,12 @@ export enum UserRole {
 
 export interface IUser {
   id: number;
-  name: string;
   email: string;
+  password: string;
+  name: string;
   type: UserRole;
   isActivated: boolean;
-  //   createdAt: Date;
-  //   updatedAt: Date;
+  posts: IPost[];
+  createdAt: Date;
+  updatedAt: Date;
 }
