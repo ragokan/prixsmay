@@ -20,11 +20,11 @@ model User {
   type        Role    @default(user)
   isActivated Boolean @default(false)
   posts       Post[]
+  votes       Vote[]
 
   // Utility
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Vote      Vote[]
 }
 
 model Post {
