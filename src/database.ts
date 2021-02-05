@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-const { user, post, vote } = prisma;
+const { user: User, post: Post, vote: Vote } = prisma;
 
-export { prisma, user as User };
+export { prisma, User, Post, Vote };
