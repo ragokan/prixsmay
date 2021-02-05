@@ -14,7 +14,7 @@ const LoginRequired = Async(async (req: RequestContext, res: ResponseContext, ne
   // Add user here
   const user = await User.findUnique({ where: { id: req.session.userId } });
   if (!user) return noPermissionError(next);
-  req.user = { ...user, type: UserRole[user.type] };
+  req.user = { ...user, type: UserRole[user.type], posts: [] };
 
   next();
 });
