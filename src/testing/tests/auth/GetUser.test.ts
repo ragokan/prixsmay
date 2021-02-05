@@ -11,9 +11,10 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await server.close((err: any) => {
-    if (err) return console.log(err);
-  });
+  if (server)
+    await server.close((err: any) => {
+      if (err) return console.log(err);
+    });
 });
 
 describe("Get User", () => {
