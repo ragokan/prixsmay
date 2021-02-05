@@ -24,6 +24,7 @@ model User {
   // Utility
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Vote      Vote[]
 }
 
 model Post {
@@ -50,4 +51,7 @@ model Vote {
 
   post   Post @relation(fields: [postId], references: [id])
   postId Int
+
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
 }
