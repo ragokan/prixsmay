@@ -18,7 +18,7 @@ export const GetSinglePostFunction = Async(async (req: ReqBody, res: ResponseCon
   });
 
   res
-    .status(200)
+    .status(post ? 200 : 404)
     .json(
       InlineType<IPostResponse>(
         post

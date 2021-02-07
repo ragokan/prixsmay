@@ -4,6 +4,7 @@ import { testUrl } from "../../utils/TestConstants";
 import { StartTest } from "../../utils/StartTest";
 import { TestAccount } from "../../utils/TestAccount";
 import { CreateFakePost } from "../../utils/CreateTestPost";
+import { IPost } from "../../../types/PostType";
 
 let server: any;
 beforeAll(async () => {
@@ -21,7 +22,8 @@ describe("Crud On Post", () => {
   const user = TestAccount;
   let cookie: any;
   const fakePost = CreateFakePost();
-  let dbPost: any;
+  const fakePostToUpdate = CreateFakePost();
+  let dbPost: IPost;
 
   it("login user", async () => {
     const body = {
@@ -47,6 +49,7 @@ describe("Crud On Post", () => {
     const data = await responseData.json();
 
     dbPost = data.post;
+    dbPost.id = parseInt(data.post.id);
 
     expect(data).toMatchObject({
       message: "Post is created successfully!",
@@ -61,8 +64,9 @@ describe("Crud On Post", () => {
     expect(data.post.author).toBeDefined();
   });
 
-  it("validate with database", async () => {
-    const post = await prisma.post.findUnique({ where: { id: parseInt(dbPost.id) } });
+  it("validate with database before update", async () => {
+    const post = await prisma.post.findUnique({ where: { id: dbPost.id } });
+    if (post) dbPost = post;
 
     expect(post).toBeDefined();
     expect(post).toMatchObject({
@@ -71,18 +75,103 @@ describe("Crud On Post", () => {
     });
   });
 
-  // Burada Get One Post Testi Yap
-  // it ("gets post",async () => {})
+  it("gets post before update", async () => {
+    const response = await fetch(testUrl + "post/" + dbPost.id);
+    expect(response.status).toBe(200);
 
-  // Burada Update Post Testi Yap
+    const data = await response.json();
+
+    expect(data).toMatchObject({
+      message: "Post is received successfully!",
+      success: true,
+    });
+    expect(data.post).toMatchObject({
+      authorId: dbPost.authorId,
+      content: dbPost.content,
+      id: dbPost.id,
+      title: dbPost.title,
+    });
+  });
+
+  it("updates post", async () => {
+    const responseData = await fetch(testUrl + "post/" + dbPost.id, {
+      method: "PATCH",
+      body: JSON.stringify(fakePostToUpdate),
+      headers: { cookie, "Content-Type": "application/json" },
+    });
+
+    expect(responseData.status).toBe(200);
+    const data = await responseData.json();
+
+    dbPost = data.post;
+    dbPost.id = parseInt(data.post.id);
+
+    expect(data).toMatchObject({
+      message: "Post is updated successfully!",
+      success: true,
+      post: {
+        title: fakePostToUpdate.title,
+        content: fakePostToUpdate.content,
+      },
+    });
+    expect(data.post.createdAt).toBeDefined();
+    expect(data.post.createdAt).toBeDefined();
+    expect(data.post.author).toBeDefined();
+  });
+
+  it("gets post after update", async () => {
+    const response = await fetch(testUrl + "post/" + dbPost.id);
+    expect(response.status).toBe(200);
+
+    const data = await response.json();
+
+    expect(data).toMatchObject({
+      message: "Post is received successfully!",
+      success: true,
+    });
+    expect(data.post).toMatchObject({
+      authorId: dbPost.authorId,
+      content: dbPost.content,
+      id: dbPost.id,
+      title: dbPost.title,
+    });
+  });
+
+  it("validate with database after update", async () => {
+    const post = await prisma.post.findUnique({ where: { id: dbPost.id } });
+    if (post) dbPost = post;
+
+    expect(post).toBeDefined();
+    expect(post).toMatchObject({
+      title: fakePostToUpdate.title,
+      content: fakePostToUpdate.content,
+    });
+  });
 
   // TODO : Bunu Router Ile Sil
   it("delete post", async () => {
-    await prisma.post.delete({ where: { id: parseInt(dbPost.id) } });
+    const responseData = await fetch(testUrl + "post/" + dbPost.id, {
+      method: "DELETE",
+      headers: { cookie },
+    });
+
+    expect(responseData.status).toBe(200);
+    const data = await responseData.json();
+
+    expect(data).toMatchObject({ message: "Post is deleted successfully!", success: true });
+  });
+
+  it("gets post after delete", async () => {
+    const response = await fetch(testUrl + "post/" + dbPost.id);
+    expect(response.status).toBe(404);
+
+    const data = await response.json();
+
+    expect(data).toMatchObject({ message: "No post is found with this id!", success: false });
   });
 
   it("check database", async () => {
-    const post = await prisma.post.findUnique({ where: { id: parseInt(dbPost.id) } });
+    const post = await prisma.post.findUnique({ where: { id: dbPost.id } });
 
     expect(post).toBeNull();
   });
