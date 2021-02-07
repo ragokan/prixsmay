@@ -71,6 +71,8 @@ describe("Create Post", () => {
     });
   });
 
+  // it ("gets post",async () => {})
+
   it("delete post", async () => {
     await prisma.post.delete({ where: { id: parseInt(dbPost.id) } });
   });
