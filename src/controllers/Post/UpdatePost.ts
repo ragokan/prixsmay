@@ -20,8 +20,8 @@ export const UpdatePostFunction = Async(async (req: ReqBody, res: ResponseContex
   const id = parseInt(req.params.id);
 
   const postControl = await Post.findUnique({ where: { id } });
-  if (!postControl) return next(new ErrorObject("No post is found with this id!", 404));
 
+  if (!postControl) return next(new ErrorObject("No post is found with this id!", 404));
   if (postControl.authorId !== req.session.userId) return next(new ErrorObject("You can't update others posts!", 400));
 
   const post = await Post.update({

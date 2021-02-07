@@ -17,7 +17,7 @@ afterAll(async () => {
     });
 });
 
-describe("Create Post", () => {
+describe("Crud On Post", () => {
   const user = TestAccount;
   let cookie: any;
   const fakePost = CreateFakePost();
@@ -71,8 +71,12 @@ describe("Create Post", () => {
     });
   });
 
+  // Burada Get One Post Testi Yap
   // it ("gets post",async () => {})
 
+  // Burada Update Post Testi Yap
+
+  // TODO : Bunu Router Ile Sil
   it("delete post", async () => {
     await prisma.post.delete({ where: { id: parseInt(dbPost.id) } });
   });
