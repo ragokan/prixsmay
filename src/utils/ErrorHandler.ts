@@ -15,7 +15,10 @@ const ErrorHandler = (err: IError, _: Request, res: Response, __: NextFunction) 
 };
 
 const NotFound = (req: Request, _: Response, next: NextFunction) => {
-  const NotFoundError = new ErrorObject(`The url you wanted to see '${req.originalUrl}' is not found`, 404);
+  const NotFoundError = new ErrorObject(
+    `The url '${req.originalUrl}' or the method '${req.method}' is not available!`,
+    404
+  );
   next(NotFoundError);
 };
 
