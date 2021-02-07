@@ -19,7 +19,7 @@ export const ConfirmEmailFunction = Async(async (req: ReqBody, res: ResponseCont
   if (!token) return next(new ErrorObject("You should provide a confirm token!", 400));
 
   const id = await redis.get(confirmMailConstant + token);
-  if (!id) return next(new ErrorObject("No id is found!", 404));
+  if (!id) return next(new ErrorObject("The token is already expired, please get a new verification token!", 404));
 
   const user = await User.update({ where: { id: parseInt(id) }, data: { isActivated: true } });
   if (!user) return next(new ErrorObject("User doesnt exists!", 404));
