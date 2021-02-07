@@ -2,11 +2,12 @@ import express from "express";
 import { CreatePostFunction } from "../controllers/Post/CreatePost";
 import { GetPostsFunction } from "../controllers/Post/GetPosts";
 import { GetSinglePostFunction } from "../controllers/Post/GetSinglePost";
+import { UpdatePostFunction } from "../controllers/Post/UpdatePost";
 import { LoginRequired } from "../middleware/Authentication";
 
 const router = express.Router();
 
 router.route("/").post(LoginRequired, CreatePostFunction).get(GetPostsFunction);
-router.route("/:id").get(GetSinglePostFunction);
+router.route("/:id").get(GetSinglePostFunction).patch(LoginRequired, UpdatePostFunction);
 
 export default router;
