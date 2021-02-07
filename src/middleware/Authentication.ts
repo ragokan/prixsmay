@@ -5,8 +5,7 @@ import { RequestContext, ResponseContext } from "../types/ExpressTypes";
 import { UserRole } from "../types/UserType";
 import { User } from "../database";
 
-const noPermissionError = (next: NextFunction) =>
-  next(new ErrorObject("You don't have permission to do this action!", 401));
+const noPermissionError = (next: NextFunction) => next(new ErrorObject("You have to login to do this action!", 401));
 
 const LoginRequired = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
   if (!req.session.userId) return noPermissionError(next);

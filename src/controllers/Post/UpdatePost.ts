@@ -9,9 +9,7 @@ import ErrorObject from "../../utils/ErrorObject";
 
 interface ReqBody extends RequestContext {
   body: PostBodyType;
-  params: {
-    id: string;
-  };
+  params: { id: string };
 }
 
 export const UpdatePostFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
@@ -30,7 +28,7 @@ export const UpdatePostFunction = Async(async (req: ReqBody, res: ResponseContex
     include: { author: { select: { email: true, id: true, name: true } }, votes: true },
   });
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<IPostResponse>({ message: "Post is updated successfully!", success: true, post })
   );
 });
