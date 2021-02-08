@@ -24,6 +24,21 @@ export const VotePostFunction = Async(async (req: ReqBody, res: ResponseContext,
 
   const isVoted = postControl.votes.find((vote) => vote.authorId === req.user.id);
   if (isVoted) {
+    const voteType = isVoted.type;
+
+    if (voteType === req.body.type) {
+      post = await Post.update({
+        where: { id },
+        data: { votes: { delete: { id: isVoted.id } } },
+        include: postIncludeOptions,
+      });
+    } else {
+      post = await Post.update({
+        where: { id },
+        data: { votes: { update: { where: { id: isVoted.id }, data: { type: req.body.type } } } },
+        include: postIncludeOptions,
+      });
+    }
   } else {
     post = await Post.update({
       where: { id },
@@ -33,6 +48,6 @@ export const VotePostFunction = Async(async (req: ReqBody, res: ResponseContext,
   }
 
   res.status(201).json(
-    InlineType<IPostResponse>({ message: "Post is voted successfully!", success: true })
+    InlineType<IPostResponse>({ message: "Post is voted successfully!", success: true, post })
   );
 });

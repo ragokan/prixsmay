@@ -13,9 +13,7 @@ export const VoteValidation = (data: VoteBodyType) => {
     }),
     type: Joi.string().required().valid("up", "down").messages({
       "any.required": "Please provide a type!",
-      "any.valid": "Please provide a type that only 'up' or 'down'.",
-      valid: "Please provide a type that only 'up' or 'down'.",
-      "any.messages": "Please provide a type that only 'up' or 'down'.",
+      "any.only": "Please provide a type that only 'up' or 'down'.",
     }),
   });
   return schema.validate(data);
