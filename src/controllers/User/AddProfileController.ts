@@ -5,8 +5,8 @@ import { InlineType } from "../../utils/InlineType";
 import { IUserResponse } from "../../types/ResponseTypes";
 import { useCloudinary } from "../../utils/UseCloudinary";
 import ErrorObject from "../../utils/ErrorObject";
-// import { omit } from "lodash";
-// import { User } from "../../database";
+import { User } from "../../database";
+import { omit } from "lodash";
 
 interface ReqBody extends RequestContext {
   files: {
@@ -26,22 +26,34 @@ interface ReqBody extends RequestContext {
 }
 
 export const AddProfileFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
-  //   const user = await User.findUnique({ where: { id: req.session.userId }, include: { posts: true } });
-  //   const filteredUser = omit(user, ["password", "isActivated"]);
   const { image } = req.files;
   if (!image || !image.type.includes("image"))
     return next(new ErrorObject("Please provide an image to update your profile!", 400));
+
+  // Delete Old Profile Picture
+  const userCheck = await User.findUnique({ where: { id: req.session.userId } });
+  const url = userCheck!.profile;
+  const userCurrentImage = url.match(/upload\/(?:v\d+\/)?([^\.]+)/)?.find((_, i) => i === 1);
+  const defaultPic = "user_kkhvsb";
+  if (userCurrentImage && userCurrentImage !== defaultPic) await useCloudinary.uploader.destroy(userCurrentImage);
+
   const result = await useCloudinary.uploader.upload(image.path, {
     unique_filename: true,
     transformation: { height: 400 },
   });
-  console.log(result.secure_url);
+
+  const user = await User.update({
+    where: { id: req.session.userId },
+    include: { posts: true },
+    data: { profile: result.secure_url },
+  });
+  const filteredUser = omit(user, ["password", "isActivated"]);
 
   res.status(200).json(
     InlineType<IUserResponse>({
       message: "User profile is updated successfully!",
       success: true,
-      // user: filteredUser
+      user: filteredUser,
     })
   );
 });

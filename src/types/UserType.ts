@@ -12,6 +12,7 @@ export interface IUser {
   name: string;
   type: UserRole;
   isActivated: boolean;
+  profile: string;
   posts?: IPost[];
   createdAt: Date;
   updatedAt: Date;

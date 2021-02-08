@@ -19,6 +19,7 @@ model User {
   name        String
   type        Role    @default(user)
   isActivated Boolean @default(false)
+  profile String @default("https://res.cloudinary.com/ragokan/image/upload/v1612791907/user_kkhvsb.png")
   posts       Post[]
   votes       Vote[]
 
