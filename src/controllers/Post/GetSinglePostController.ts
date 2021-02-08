@@ -4,6 +4,7 @@ import { NextFunction } from "express";
 import { InlineType } from "../../utils/InlineType";
 import { IPostResponse } from "../../types/ResponseTypes";
 import { Post } from "../../database";
+import { postIncludeOptions } from "./Utils/PostIncludeOptions";
 
 interface ReqBody extends RequestContext {
   params: {
@@ -14,7 +15,7 @@ interface ReqBody extends RequestContext {
 export const GetSinglePostFunction = Async(async (req: ReqBody, res: ResponseContext, _: NextFunction) => {
   const post = await Post.findUnique({
     where: { id: parseInt(req.params.id) },
-    include: { author: { select: { email: true, name: true, id: true } }, votes: true },
+    include: postIncludeOptions,
   });
 
   res

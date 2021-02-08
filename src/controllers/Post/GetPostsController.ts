@@ -4,10 +4,11 @@ import { NextFunction } from "express";
 import { InlineType } from "../../utils/InlineType";
 import { IPostResponse } from "../../types/ResponseTypes";
 import { Post } from "../../database";
+import { postIncludeOptions } from "./Utils/PostIncludeOptions";
 
 export const GetPostsFunction = Async(async (req: RequestContext, res: ResponseContext, _: NextFunction) => {
   const posts = await Post.findMany({
-    include: { author: { select: { email: true, name: true, id: true } }, votes: true },
+    include: postIncludeOptions,
   });
 
   res.status(200).json(

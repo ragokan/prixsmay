@@ -6,6 +6,7 @@ import { IPostResponse } from "../../types/ResponseTypes";
 import { Post } from "../../database";
 import { PostBodyType, PostValidation } from "../../validation/PostValidation";
 import ErrorObject from "../../utils/ErrorObject";
+import { postIncludeOptions } from "./Utils/PostIncludeOptions";
 
 interface ReqBody extends RequestContext {
   body: PostBodyType;
@@ -17,7 +18,7 @@ export const CreatePostFunction = Async(async (req: ReqBody, res: ResponseContex
 
   const post = await Post.create({
     data: { ...req.body, authorId: req.session.userId! },
-    include: { author: { select: { email: true, id: true, name: true } } },
+    include: postIncludeOptions,
   });
 
   res.status(201).json(

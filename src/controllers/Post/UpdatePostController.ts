@@ -6,6 +6,7 @@ import { IPostResponse } from "../../types/ResponseTypes";
 import { Post } from "../../database";
 import { PostBodyType, PostValidation } from "../../validation/PostValidation";
 import ErrorObject from "../../utils/ErrorObject";
+import { postIncludeOptions } from "./Utils/PostIncludeOptions";
 
 interface ReqBody extends RequestContext {
   body: PostBodyType;
@@ -25,7 +26,7 @@ export const UpdatePostFunction = Async(async (req: ReqBody, res: ResponseContex
   const post = await Post.update({
     where: { id },
     data: { ...req.body },
-    include: { author: { select: { email: true, id: true, name: true } }, votes: true },
+    include: postIncludeOptions,
   });
 
   res.status(200).json(
