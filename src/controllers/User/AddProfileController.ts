@@ -7,6 +7,8 @@ import { useCloudinary } from "../../utils/UseCloudinary";
 import ErrorObject from "../../utils/ErrorObject";
 import { User } from "../../database";
 import { omit } from "lodash";
+import { FindImageName } from "../../utils/FindImageNameRegex";
+import { defaultUserPictureConstant } from "../../constants/CloudinaryConstants";
 
 interface ReqBody extends RequestContext {
   files: {
@@ -32,10 +34,9 @@ export const AddProfileFunction = Async(async (req: ReqBody, res: ResponseContex
 
   // Delete Old Profile Picture
   const userCheck = await User.findUnique({ where: { id: req.session.userId } });
-  const url = userCheck!.profile;
-  const userCurrentImage = url.match(/upload\/(?:v\d+\/)?([^\.]+)/)?.find((_, i) => i === 1);
-  const defaultPic = "user_kkhvsb";
-  if (userCurrentImage && userCurrentImage !== defaultPic) await useCloudinary.uploader.destroy(userCurrentImage);
+  const userCurrentImage = FindImageName(userCheck!.profile);
+  if (userCurrentImage && userCurrentImage !== defaultUserPictureConstant)
+    await useCloudinary.uploader.destroy(userCurrentImage);
 
   const result = await useCloudinary.uploader.upload(image.path, {
     unique_filename: true,
