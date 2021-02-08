@@ -47,7 +47,7 @@ export const VotePostFunction = Async(async (req: ReqBody, res: ResponseContext,
     });
   }
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<IPostResponse>({ message: "Post is voted successfully!", success: true, post })
   );
 });

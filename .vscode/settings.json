@@ -9,6 +9,16 @@
             "database": "prixsmay",
             "username": "ragokan",
             "password": "hammer90"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5433,
+            "driver": "PostgreSQL",
+            "name": "TestDB",
+            "database": "prixsmay-test",
+            "username": "ragokan",
+            "password": "hammer90"
         }
     ]
 }
