@@ -15,6 +15,9 @@ declare global {
       redisPassword: string;
       frontendUrl: string;
       testMode: string;
+      cloud_name: string;
+      api_key: string;
+      api_secret: string;
     }
   }
 }
