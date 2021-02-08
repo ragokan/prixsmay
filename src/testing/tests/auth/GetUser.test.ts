@@ -43,7 +43,7 @@ describe("Get User", () => {
   });
 
   it("get user", async () => {
-    const responseData = await fetch(testUrl + "auth/user", {
+    const responseData = await fetch(testUrl + "/user", {
       method: "GET",
       headers: { cookie },
     });

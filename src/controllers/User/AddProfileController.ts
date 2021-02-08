@@ -7,14 +7,26 @@ import { IUserResponse } from "../../types/ResponseTypes";
 // import { User } from "../../database";
 
 interface ReqBody extends RequestContext {
-  files: any;
+  files: {
+    image: {
+      fieldName: string;
+      originalFilename: string;
+      path: string;
+      headers: {
+        "content-disposition": string;
+        "content-type": string;
+      };
+      size: number;
+      name: string;
+      type: string;
+    };
+  };
 }
 
 export const AddProfileFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
   //   const user = await User.findUnique({ where: { id: req.session.userId }, include: { posts: true } });
   //   const filteredUser = omit(user, ["password", "isActivated"]);
-
-  console.log(req.files);
+  const { image } = req.files;
 
   res.status(200).json(
     InlineType<IUserResponse>({
