@@ -12,9 +12,12 @@ interface ReqBody extends RequestContext {
   body: CommentBodyType
 }
 
-export const CreatePostFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
+export const CreateCommentFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
   const { error } = CommentValidation(req.body)
   if (error) return next(new ErrorObject(error.details[0].message, 400))
+
+  const postCheck = await Post.findUnique({ where: { id: req.body.postId } })
+  if (!postCheck) return next(new ErrorObject("No post is found with this id!", 404))
 
   const post = await Post.update({
     where: { id: req.body.postId },
@@ -23,6 +26,6 @@ export const CreatePostFunction = Async(async (req: ReqBody, res: ResponseContex
   })
 
   res.status(201).json(
-    InlineType<IPostResponse>({ message: "Post is created successfully!", success: true, post })
+    InlineType<IPostResponse>({ message: "Comment is created successfully!", success: true, post })
   )
 })
