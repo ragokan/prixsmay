@@ -6,8 +6,8 @@ export interface IPost {
   title: string
   content: string
   authorId: number
-  votes: IVote[]
-  comments: IComment[]
+  votes?: IVote[]
+  comments?: IComment[]
 
   createdAt: Date
   updatedAt: Date
