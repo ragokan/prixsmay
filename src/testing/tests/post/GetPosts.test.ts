@@ -1,39 +1,40 @@
-import { prisma } from "../../../database";
-import fetch from "node-fetch";
-import { testUrl } from "../../utils/TestConstants";
-import { StartTest } from "../../utils/StartTest";
+import { prisma } from "../../../database"
+import fetch from "node-fetch"
+import { testUrl } from "../../utils/TestConstants"
+import { StartTest } from "../../utils/StartTest"
+import { Server } from "http"
 
-let server: any;
+let server: Server
 beforeAll(async () => {
-  server = await StartTest();
-});
+  server = await StartTest()
+})
 
 afterAll(async () => {
   if (server)
-    await server.close((err: any) => {
-      if (err) return console.log(err);
-    });
-});
+    server.close((err: any) => {
+      if (err) return console.log(err)
+    })
+})
 
 describe("Get Posts", () => {
   it("gets posts and evaluate", async () => {
-    const response = await fetch(testUrl + "post");
+    const response = await fetch(testUrl + "post")
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(200)
 
-    const data = await response.json();
+    const data = await response.json()
 
     expect(data).toMatchObject({
       message: "Posts are received successfully!",
       success: true,
-    });
+    })
 
-    expect(Array.isArray(data.posts)).toBe(true);
-  });
+    expect(Array.isArray(data.posts)).toBe(true)
+  })
 
   it("tests posts in database", async () => {
-    const posts = await prisma.post.findMany();
-    expect(posts).toBeDefined();
-    expect(Array.isArray(posts)).toBe(true);
-  });
-});
+    const posts = await prisma.post.findMany()
+    expect(posts).toBeDefined()
+    expect(Array.isArray(posts)).toBe(true)
+  })
+})
