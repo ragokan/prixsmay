@@ -13,15 +13,17 @@ enum Role {
 }
 
 model User {
-  id          Int     @id @default(autoincrement())
-  email       String  @unique
-  password    String
-  name        String
-  type        Role    @default(user)
-  isActivated Boolean @default(false)
-  profile     String  @default("https://res.cloudinary.com/ragokan/image/upload/v1612791907/user_kkhvsb.png")
-  posts       Post[]
-  votes       Vote[]
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  password     String
+  name         String
+  type         Role          @default(user)
+  isActivated  Boolean       @default(false)
+  profile      String        @default("https://res.cloudinary.com/ragokan/image/upload/v1612791907/user_kkhvsb.png")
+  posts        Post[]
+  votes        Vote[]
+  comments     Comment[]
+  commentVotes CommentVote[]
 
   // Utility
   createdAt DateTime @default(now())
@@ -29,12 +31,13 @@ model User {
 }
 
 model Post {
-  id       Int    @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   title    String
   content  String
-  author   User   @relation(fields: [authorId], references: [id])
+  author   User      @relation(fields: [authorId], references: [id])
   authorId Int
   votes    Vote[]
+  comments Comment[]
 
   // Utility
   createdAt DateTime @default(now())
@@ -52,6 +55,29 @@ model Vote {
 
   post   Post @relation(fields: [postId], references: [id])
   postId Int
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+model Comment {
+  id    Int           @id @default(autoincrement())
+  text  String
+  votes CommentVote[]
+
+  post   Post @relation(fields: [postId], references: [id])
+  postId Int
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+model CommentVote {
+  id   Int      @id @default(autoincrement())
+  type VoteType
+
+  comment   Comment @relation(fields: [commentId], references: [id])
+  commentId Int
 
   user   User @relation(fields: [userId], references: [id])
   userId Int
