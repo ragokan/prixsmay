@@ -11,3 +11,10 @@ export interface IVote {
   postId?: number
   userId: number
 }
+
+export interface ICommentVote {
+  id: number
+  type: VoteType
+  commentId: number
+  userId: number
+}
