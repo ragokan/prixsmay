@@ -8,7 +8,7 @@ export type VoteType = typeof VoteType[keyof typeof VoteType]
 export interface IVote {
   id: number
   type: VoteType
-  postId?: number
+  postId: number
   userId: number
 }
 
