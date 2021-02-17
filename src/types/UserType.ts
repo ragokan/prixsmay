@@ -1,4 +1,4 @@
-import { IPost } from "./PostType";
+import { IPost } from "./PostType"
 
 export enum UserRole {
   user = "user",
@@ -6,14 +6,22 @@ export enum UserRole {
 }
 
 export interface IUser {
-  id: number;
-  email: string;
-  password: string;
-  name: string;
-  type: UserRole;
-  isActivated: boolean;
-  profile: string;
-  posts?: IPost[];
-  createdAt: Date;
-  updatedAt: Date;
+  id: number
+  email: string
+  password: string
+  name: string
+  type: UserRole
+  isActivated: boolean
+  profile: Profile | null
+  posts?: IPost[]
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface Profile {
+  id: number
+  picture: string
+  userId: number
+  createdAt: Date
+  updatedAt: Date
 }
