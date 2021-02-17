@@ -1,6 +1,6 @@
 export interface ITestUser {
-  id?: number;
-  name: string;
-  email: string;
-  password: string;
+  id?: number
+  username: string
+  email: string
+  password: string
 }

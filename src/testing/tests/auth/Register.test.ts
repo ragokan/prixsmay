@@ -35,7 +35,7 @@ describe("Register", () => {
       message: "User is created successfully!",
       success: true,
       user: {
-        name: user.name,
+        username: user.username,
         email: user.email,
         isActivated: false,
       },

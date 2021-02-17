@@ -47,7 +47,7 @@ describe("Login", () => {
       success: true,
       user: {
         id: dbUser.id,
-        name: user.name,
+        username: user.username,
         email: user.email,
         type: "user",
       },
