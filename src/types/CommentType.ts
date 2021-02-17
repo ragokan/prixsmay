@@ -5,5 +5,5 @@ export interface IComment {
   text: string
   postId: number
   userId: number
-  votes: ICommentVote[]
+  votes?: ICommentVote[]
 }
