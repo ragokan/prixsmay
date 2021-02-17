@@ -1,3 +1,4 @@
 import { Prisma } from "@prisma/client"
 
-export const userIncludeOptions: Prisma.UserInclude = { posts: true, profile: true }
+export const userProfileArgs: Prisma.ProfileArgs = { select: { picture: true } }
+export const userIncludeOptions: Prisma.UserInclude = { posts: true, profile: userProfileArgs }

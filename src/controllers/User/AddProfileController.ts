@@ -10,7 +10,6 @@ import { omit } from "lodash"
 import { FindImageName } from "../../utils/FindImageNameRegex"
 import { defaultUserPictureConstant } from "../../constants/CloudinaryConstants"
 import { userIncludeOptions } from "./Utils/UserIncludeOptions"
-import { IUser } from "../../types/UserType"
 
 interface ReqBody extends RequestContext {
   files: {
@@ -47,7 +46,7 @@ export const AddProfileFunction = Async(async (req: ReqBody, res: ResponseContex
 
   const user = await User.update({
     where: { id: req.session.userId },
-    include: { posts: true },
+    include: userIncludeOptions,
     data: { profile: { update: { picture: result.secure_url } } },
   })
   const filteredUser = omit(user, ["password", "isActivated"])
