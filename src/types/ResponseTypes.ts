@@ -1,6 +1,6 @@
 import { IComment } from "./CommentType"
 import { IPost } from "./PostType"
-import { IVote } from "./VoteType"
+import { ICommentVote, IVote } from "./VoteType"
 
 export interface IResponse {
   success: boolean
@@ -19,4 +19,8 @@ export interface IPostResponse extends IResponse {
 export interface ICommentResponse extends IResponse {
   comments?: IComment[]
   comment?: IComment
+}
+
+export interface IVoteResponse extends IResponse {
+  votes?: IVote[] | ICommentVote[]
 }

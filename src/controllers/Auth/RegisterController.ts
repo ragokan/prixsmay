@@ -26,7 +26,7 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
   const password = await bcrypt.hash(req.body.password, 11)
 
   let user = await User.create({
-    data: { ...req.body, password, profile: { create: {} } },
+    data: { ...req.body, username: req.body.username.trim(), password, profile: { create: {} } },
     include: userIncludeOptions,
   })
 

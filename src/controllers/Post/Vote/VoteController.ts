@@ -2,7 +2,7 @@ import { RequestContext, ResponseContext } from "../../../types/ExpressTypes"
 import Async from "../../../middleware/Async"
 import { NextFunction } from "express"
 import { InlineType } from "../../../utils/InlineType"
-import { IPostResponse } from "../../../types/ResponseTypes"
+import { IVoteResponse } from "../../../types/ResponseTypes"
 import { Post } from "../../../database"
 import ErrorObject from "../../../utils/ErrorObject"
 import { VoteBodyType, VoteValidation } from "../../../validation/VoteValidation"
@@ -48,6 +48,6 @@ export const VotePostFunction = Async(async (req: ReqBody, res: ResponseContext,
   }
 
   res.status(200).json(
-    InlineType<IPostResponse>({ message: "Post is voted successfully!", success: true, post })
+    InlineType<IVoteResponse>({ message: "Post is voted successfully!", success: true, votes: post.votes })
   )
 })
