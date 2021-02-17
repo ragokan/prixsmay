@@ -4,9 +4,8 @@ export const userIncludeOptions: Prisma.UserArgs = { select: { id: true, email: 
 
 export const postIncludeOptions: Prisma.PostInclude = {
   author: userIncludeOptions,
-  votes: { select: { id: true, type: true, userId: true } },
+  votes: { select: { type: true, userId: true } },
   comments: {
-    select: { text: true, votes: { select: { type: true, userId: true } } },
-    include: { user: userIncludeOptions },
+    select: { text: true, user: userIncludeOptions, votes: { select: { type: true, userId: true } } },
   },
 }
