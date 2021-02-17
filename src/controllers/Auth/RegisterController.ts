@@ -20,8 +20,10 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
   const { error } = RegisterValidation(req.body)
   if (error) return next(new ErrorObject(error.details[0].message, 400))
 
-  const userCheck = await User.findUnique({ where: { email: req.body.email } })
-  if (userCheck) return next(new ErrorObject("User already exists!", 400))
+  const userCheck = await User.findFirst({
+    where: { OR: [{ email: req.body.email }, { username: req.body.username }] },
+  })
+  if (userCheck) return next(new ErrorObject("Username or email is already in use!", 400))
 
   const password = await bcrypt.hash(req.body.password, 11)
 
