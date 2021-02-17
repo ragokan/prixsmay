@@ -24,15 +24,15 @@ describe("Vote Post", () => {
   const user = TestAccount
   let cookie: any
   const fakePost = CreateFakePost()
-  const fakePostToUpdate = CreateFakePost()
   let randomVote = Math.random() < 0.5 ? "up" : "down"
   let dbPost: IPost
 
-  function postValidation(data: any) {
-    expect(data.post.votes).toBeDefined()
-    expect(data.post.votes.length > 0).toBe(true)
-    expect(data.post.votes.length).toBe(1)
-    expect(data.post.votes[0].type).toBe(randomVote)
+  function voteValidationFunction(data: any) {
+    const votes = data.votes || data.post.votes
+    expect(votes).toBeDefined()
+    expect(votes.length > 0).toBe(true)
+    expect(votes.length).toBe(1)
+    expect(votes[0].type).toBe(randomVote)
   }
 
   it("login user", async () => {
@@ -74,13 +74,13 @@ describe("Vote Post", () => {
 
     const data = await responseData.json()
 
-    postValidation(data)
+    voteValidationFunction(data)
   })
   it("gets post after first vote", async () => {
     const response = await fetch(testUrl + "post/" + dbPost.id)
     const data = await response.json()
 
-    postValidation(data)
+    voteValidationFunction(data)
   })
 
   it("vote post again", async () => {
@@ -100,7 +100,7 @@ describe("Vote Post", () => {
 
     const data = await responseData.json()
 
-    postValidation(data)
+    voteValidationFunction(data)
   })
   it("vote post to remove vote", async () => {
     const body = {
@@ -117,8 +117,8 @@ describe("Vote Post", () => {
 
     const data = await responseData.json()
 
-    expect(data.post.votes.length > 0).toBe(false)
-    expect(data.post.votes.length).toBe(0)
+    expect(data.votes.length > 0).toBe(false)
+    expect(data.votes.length).toBe(0)
   })
 
   it("delete post", async () => {

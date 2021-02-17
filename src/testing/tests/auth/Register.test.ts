@@ -47,6 +47,8 @@ describe("Register", () => {
     expect(dbUser?.isActivated).toBeFalsy()
   })
   it("delete user", async () => {
+    const profile = await prisma.profile.findFirst({ where: { user: { email: user.email } } })
+    await prisma.profile.delete({ where: { id: profile?.id } })
     await prisma.user.delete({ where: { email: user.email } })
 
     const dbUser = await prisma.user.findUnique({ where: { email: user.email } })

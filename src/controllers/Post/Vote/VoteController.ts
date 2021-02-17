@@ -48,6 +48,6 @@ export const VotePostFunction = Async(async (req: ReqBody, res: ResponseContext,
   }
 
   res.status(200).json(
-    InlineType<IVoteResponse>({ message: "Post is voted successfully!", success: true, votes: post.votes })
+    InlineType<IVoteResponse>({ message: "Post is voted successfully!", success: true, votes: post.votes || [] })
   )
 })
