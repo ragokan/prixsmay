@@ -6,6 +6,6 @@ export const postIncludeOptions: Prisma.PostInclude = {
   author: userIncludeOptions,
   votes: { select: { type: true, userId: true } },
   comments: {
-    select: { text: true, user: userIncludeOptions, votes: { select: { type: true, userId: true } } },
+    select: { id: true, text: true, user: userIncludeOptions, votes: { select: { type: true, userId: true } } },
   },
 }
