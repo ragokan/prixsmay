@@ -1,6 +1,6 @@
 import { RegisterBodyType, RegisterValidation } from "../../validation/RegisterValidation"
 import { RequestContext, ResponseContext } from "../../types/ExpressTypes"
-import { CreateConfirmationUrl } from "../../utils/CreateMailUrl"
+import { CreateCONFIRMATION_URL } from "../../utils/CreateMailUrl"
 import ErrorObject from "../../utils/ErrorObject"
 import { SendEmail } from "../../utils/SendMail"
 import Async from "../../middleware/Async"
@@ -30,7 +30,7 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
     include: userIncludeOptions,
   })
 
-  if (!process.env.testMode) await SendEmail(user.email, await CreateConfirmationUrl(user.id))
+  if (!process.env.testMode) await SendEmail(user.email, await CreateCONFIRMATION_URL(user.id))
 
   const filteredUser = omit(user, ["type", "password"])
 

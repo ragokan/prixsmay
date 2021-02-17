@@ -13,7 +13,7 @@ export const startServer = async () => {
     await prisma.$connect().then(() => console.log("Successfully connected to the database!"))
 
     const app = express()
-    app.use(cors({ credentials: true, origin: process.env.frontendUrl }))
+    app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }))
     app.use(express.json())
     app.use(formData.parse())
 

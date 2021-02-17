@@ -1,10 +1,10 @@
-import connectRedis from "connect-redis";
-import { Application } from "express";
-import session from "express-session";
-import { redis } from "./redis";
+import connectRedis from "connect-redis"
+import { Application } from "express"
+import session from "express-session"
+import { redis } from "./redis"
 
 export default (app: Application) => {
-  const RedisStore = connectRedis(session);
+  const RedisStore = connectRedis(session)
   app.use(
     session({
       store: process.env.testMode
@@ -13,7 +13,7 @@ export default (app: Application) => {
             client: redis,
           }),
       name: "qid",
-      secret: process.env.sessionSecret as string,
+      secret: process.env.SESSION_SECRET as string,
       resave: true,
       saveUninitialized: false,
       rolling: true,
@@ -23,5 +23,5 @@ export default (app: Application) => {
         maxAge: 1000 * 60 * 60 * 2, // 2 Hours
       },
     })
-  );
-};
+  )
+}

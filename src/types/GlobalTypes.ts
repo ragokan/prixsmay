@@ -1,25 +1,25 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      sessionSecret: string;
-      sessionName: string;
-      mailerEmail: string;
-      mailerPassword: string;
-      confirmationUrl: string;
-      mailerTitle: string;
-      mailResetUrl: string;
-      DATABASE_URL: string;
-      TEST_DATABASE_URL: string;
-      redisHost: string;
-      redisPort: number;
-      redisPassword: string;
-      frontendUrl: string;
-      testMode: string;
-      cloud_name: string;
-      api_key: string;
-      api_secret: string;
+      SESSION_SECRET: string
+      SESSION_NAME: string
+      MAILER_EMAIL: string
+      MAILER_PASSWORD: string
+      CONFIRMATION_URL: string
+      MAILER_TITLE: string
+      MAIL_RESET_URL: string
+      DATABASE_URL: string
+      TEST_DATABASE_URL: string
+      REDIS_HOST: string
+      REDIS_PORT: number
+      REDIS_PASSWORD: string
+      FRONTEND_URL: string
+      testMode: string
+      CLOUD_NAME: string
+      API_KEY: string
+      API_SECRET: string
     }
   }
 }
 
-export {};
+export {}
