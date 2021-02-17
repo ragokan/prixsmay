@@ -10,5 +10,6 @@ export const postIncludeOptions: Prisma.PostInclude = {
   votes: { select: { type: true, userId: true } },
   comments: {
     select: { id: true, text: true, user: userSelectOptions, votes: { select: { type: true, userId: true } } },
+    orderBy: { id: "desc" },
   },
 }
