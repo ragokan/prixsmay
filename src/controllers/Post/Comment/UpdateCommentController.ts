@@ -33,7 +33,7 @@ export const UpdateCommentFunction = Async(async (req: ReqBody, res: ResponseCon
     include: commentIncludeOptions,
   })
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<ICommentResponse>({ message: "Comment is updated successfully!", success: true, comment })
   )
 })

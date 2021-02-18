@@ -23,7 +23,7 @@ export const DeleteCommentFunction = Async(async (req: ReqBody, res: ResponseCon
 
   await Comment.delete({ where: { id } })
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<ICommentResponse>({ message: "Comment is deleted successfully!", success: true })
   )
 })
