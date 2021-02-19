@@ -3,9 +3,8 @@ import fetch from "node-fetch"
 import { testUrl } from "../../utils/TestConstants"
 import { StartTest } from "../../utils/StartTest"
 import { TestAccount } from "../../utils/TestAccount"
-// import bcrypt from "bcryptjs"
-
 import { Server } from "http"
+// import bcrypt from "bcryptjs"
 
 let server: Server
 beforeAll(async () => {

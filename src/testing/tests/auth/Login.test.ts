@@ -3,7 +3,6 @@ import fetch from "node-fetch"
 import { testUrl } from "../../utils/TestConstants"
 import { StartTest } from "../../utils/StartTest"
 import { TestAccount } from "../../utils/TestAccount"
-
 import { Server } from "http"
 
 let server: Server

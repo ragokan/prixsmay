@@ -5,7 +5,6 @@ import { StartTest } from "../../utils/StartTest"
 import { TestAccount } from "../../utils/TestAccount"
 import { CreateFakePost } from "../../utils/CreateTestPost"
 import { IPost } from "../../../types/PostType"
-
 import { Server } from "http"
 
 let server: Server

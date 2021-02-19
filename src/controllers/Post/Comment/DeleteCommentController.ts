@@ -3,7 +3,7 @@ import Async from "../../../middleware/Async"
 import { NextFunction } from "express"
 import { InlineType } from "../../../utils/InlineType"
 import { ICommentResponse } from "../../../types/ResponseTypes"
-import { Comment, Post } from "../../../database"
+import { Comment, CommentVote, Post } from "../../../database"
 import ErrorObject from "../../../utils/ErrorObject"
 
 interface ReqBody extends RequestContext {
@@ -21,6 +21,8 @@ export const DeleteCommentFunction = Async(async (req: ReqBody, res: ResponseCon
 
   if (commentCheck.userId !== req.user.id) return next(new ErrorObject("You can't delete others' comments!", 401))
 
+  // CASCADE
+  await CommentVote.deleteMany({ where: { commentId: id } })
   await Comment.delete({ where: { id } })
 
   res.status(200).json(
