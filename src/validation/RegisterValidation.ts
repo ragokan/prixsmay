@@ -4,6 +4,7 @@ export interface RegisterBodyType {
   username: string
   email: string
   password: string
+  pictureUrl?: string
 }
 
 export const RegisterValidation = (data: RegisterBodyType) => {
@@ -21,6 +22,7 @@ export const RegisterValidation = (data: RegisterBodyType) => {
       "any.required": "Please enter your password!",
       "string.min": "Please enter  a password that longer than 5 characters",
     }),
+    pictureUrl: Joi.string().optional(),
   })
   return schema.validate(data)
 }

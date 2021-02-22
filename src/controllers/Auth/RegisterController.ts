@@ -11,6 +11,8 @@ import { InlineType } from "../../utils/InlineType"
 import { IUserResponse } from "../../types/ResponseTypes"
 import { omit } from "lodash"
 import { userIncludeOptions } from "../User/Utils/UserIncludeOptions"
+import { Body } from "node-fetch"
+import { defaultUserPictureUrl } from "../../constants/CloudinaryConstants"
 
 interface ReqBody extends RequestContext {
   body: RegisterBodyType
@@ -28,7 +30,12 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
   const password = await bcrypt.hash(req.body.password, 11)
 
   let user = await User.create({
-    data: { ...req.body, username: req.body.username.trim(), password, profile: { create: {} } },
+    data: {
+      email: req.body.email,
+      username: req.body.username.trim(),
+      password,
+      profile: { create: { picture: req.body.pictureUrl ? req.body.pictureUrl : defaultUserPictureUrl } },
+    },
     include: userIncludeOptions,
   })
 

@@ -11,7 +11,7 @@
     "db:push": "prisma db push --preview-feature",
     "db:migrate": "prisma migrate dev --preview-feature",
     "db:update": "prisma generate",
-    "test": "jest -i --detectOpenHandles --forceExit && npm run test"
+    "test": "jest -i --detectOpenHandles --forceExit"
   },
   "author": "ragokan",
   "license": "MIT",
