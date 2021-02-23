@@ -1,10 +1,10 @@
-import { RequestContext, ResponseContext } from "../../../types/ExpressTypes"
-import Async from "../../../middleware/Async"
 import { NextFunction } from "express"
-import { InlineType } from "../../../utils/InlineType"
+import { Comment, CommentVote } from "../../../database"
+import Async from "../../../middleware/Async"
+import { RequestContext, ResponseContext } from "../../../types/ExpressTypes"
 import { ICommentResponse } from "../../../types/ResponseTypes"
-import { Comment, CommentVote, Post } from "../../../database"
 import ErrorObject from "../../../utils/ErrorObject"
+import { InlineType } from "../../../utils/InlineType"
 
 interface ReqBody extends RequestContext {
   params: { id: string }
@@ -15,9 +15,6 @@ export const DeleteCommentFunction = Async(async (req: ReqBody, res: ResponseCon
 
   const commentCheck = await Comment.findUnique({ where: { id } })
   if (!commentCheck) return next(new ErrorObject("No comment is found with this id!", 404))
-
-  const postCheck = await Post.findUnique({ where: { id: commentCheck.postId } })
-  if (!postCheck) return next(new ErrorObject("No post is found with this id!", 404))
 
   if (commentCheck.userId !== req.user.id) return next(new ErrorObject("You can't delete others' comments!", 401))
 

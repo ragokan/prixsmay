@@ -5,7 +5,8 @@ const userSelectOptions: Prisma.UserArgs = {
   select: { id: true, email: true, username: true, profile: userProfileArgs },
 }
 
-export const commentIncludeOptions: Prisma.CommentInclude = {
+export let commentIncludeOptions: Prisma.CommentInclude = {
   votes: true,
   user: userSelectOptions,
+  comments: true,
 }

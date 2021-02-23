@@ -2,7 +2,8 @@ import Joi from "joi"
 
 export interface CommentBodyType {
   text: string
-  postId: number
+  postId?: number
+  commentId?: number
 }
 
 export const CommentValidation = (data: CommentBodyType) => {
@@ -11,9 +12,8 @@ export const CommentValidation = (data: CommentBodyType) => {
       "any.required": "Please provide a text for your comment!",
       "string.min": "Please provide a text for your comment!",
     }),
-    postId: Joi.number().required().messages({
-      "any.required": "Please provide the post to comment!",
-    }),
+    postId: Joi.number().optional(),
+    commentId: Joi.number().optional(),
   })
   return schema.validate(data)
 }

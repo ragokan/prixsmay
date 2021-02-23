@@ -1,12 +1,12 @@
-import { RequestContext, ResponseContext } from "../../../../types/ExpressTypes"
-import Async from "../../../../middleware/Async"
 import { NextFunction } from "express"
-import { InlineType } from "../../../../utils/InlineType"
-import { IVoteResponse } from "../../../../types/ResponseTypes"
-import { Comment, Post } from "../../../../database"
-import ErrorObject from "../../../../utils/ErrorObject"
-import { CommentVoteBodyType, CommentVoteValidation } from "../../../../validation/CommentVoteValidation"
+import { Comment } from "../../../../database"
+import Async from "../../../../middleware/Async"
 import { IComment } from "../../../../types/CommentType"
+import { RequestContext, ResponseContext } from "../../../../types/ExpressTypes"
+import { IVoteResponse } from "../../../../types/ResponseTypes"
+import ErrorObject from "../../../../utils/ErrorObject"
+import { InlineType } from "../../../../utils/InlineType"
+import { CommentVoteBodyType, CommentVoteValidation } from "../../../../validation/CommentVoteValidation"
 import { commentIncludeOptions } from "../Utils/CommentIncludeOptions"
 
 interface ReqBody extends RequestContext {
@@ -20,8 +20,6 @@ export const VoteCommentFunction = Async(async (req: ReqBody, res: ResponseConte
 
   let comment: IComment | null = await Comment.findUnique({ where: { id }, include: commentIncludeOptions })
   if (!comment) return next(new ErrorObject("No comment is found with this id!", 404))
-  const postControl = await Post.findUnique({ where: { id: comment?.postId }, include: { votes: true } })
-  if (!postControl) return next(new ErrorObject("No post is found with this id!", 404))
 
   const isVoted = comment.votes!.find((vote) => vote.userId === req.user.id)
   if (isVoted) {

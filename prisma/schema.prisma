@@ -77,8 +77,12 @@ model Comment {
   text  String
   votes CommentVote[]
 
-  post   Post @relation(fields: [postId], references: [id])
-  postId Int
+  post   Post? @relation(fields: [postId], references: [id])
+  postId Int?
+
+  comment   Comment?  @relation(fields: [commentId], references: [id])
+  commentId Int?
+  comments  Comment[] @relation("CommentToComment")
 
   user   User @relation(fields: [userId], references: [id])
   userId Int

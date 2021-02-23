@@ -1,12 +1,12 @@
-import { RequestContext, ResponseContext } from "../../../types/ExpressTypes"
-import Async from "../../../middleware/Async"
 import { NextFunction } from "express"
-import { InlineType } from "../../../utils/InlineType"
-import { ICommentResponse } from "../../../types/ResponseTypes"
-import { Comment, Post } from "../../../database"
-import ErrorObject from "../../../utils/ErrorObject"
-import { CommentUpdateValidation, CommentUpdateBodyType } from "../../../validation/CommentUpdateValidation"
+import { Comment } from "../../../database"
+import Async from "../../../middleware/Async"
 import { IComment } from "../../../types/CommentType"
+import { RequestContext, ResponseContext } from "../../../types/ExpressTypes"
+import { ICommentResponse } from "../../../types/ResponseTypes"
+import ErrorObject from "../../../utils/ErrorObject"
+import { InlineType } from "../../../utils/InlineType"
+import { CommentUpdateBodyType, CommentUpdateValidation } from "../../../validation/CommentUpdateValidation"
 import { commentIncludeOptions } from "./Utils/CommentIncludeOptions"
 
 interface ReqBody extends RequestContext {
@@ -21,9 +21,6 @@ export const UpdateCommentFunction = Async(async (req: ReqBody, res: ResponseCon
 
   const commentCheck = await Comment.findUnique({ where: { id } })
   if (!commentCheck) return next(new ErrorObject("No comment is found with this id!", 404))
-
-  const postCheck = await Post.findUnique({ where: { id: commentCheck.postId } })
-  if (!postCheck) return next(new ErrorObject("No post is found with this id!", 404))
 
   if (commentCheck.userId !== req.user.id) return next(new ErrorObject("You can't update others' comments!", 401))
 
