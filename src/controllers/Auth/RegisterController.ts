@@ -34,7 +34,7 @@ export const RegisterFunction = Async(async (req: ReqBody, res: ResponseContext,
       email: req.body.email,
       username: req.body.username.trim(),
       password,
-      profile: { create: { picture: req.body.pictureUrl ? req.body.pictureUrl : defaultUserPictureUrl } },
+      profile: { create: { picture: req.body.pictureUrl ? req.body.pictureUrl : defaultUserPictureUrl[0] } },
     },
     include: userIncludeOptions,
   })
