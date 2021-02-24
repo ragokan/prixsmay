@@ -35,7 +35,7 @@ export const GetSingleCommunityFunction = Async(async (req: ReqBody, res: Respon
   } else {
     community = await Community.findUnique({
       where: { id: parseInt(req.params.id) },
-      include: communityIncludeOptions(Math.max()),
+      include: communityIncludeOptions(999999),
     })
 
     community = {
