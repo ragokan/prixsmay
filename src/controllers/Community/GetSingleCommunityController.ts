@@ -14,13 +14,17 @@ interface ReqBody extends RequestContext {
   }
   query: {
     limit?: string
+    page?: string
   }
 }
 
 export const GetSingleCommunityFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
   const community: ICommunity | null = await Community.findUnique({
     where: { id: parseInt(req.params.id) },
-    include: communityIncludeOptions(req.query.limit ? parseInt(req.query.limit) : 10),
+    include: communityIncludeOptions(
+      req.query.limit ? parseInt(req.query.limit) : 10,
+      req.query.page ? parseInt(req.query.page) : 1
+    ),
   })
   if (!community) return next(new ErrorObject("No community with this id is found!", 404))
 

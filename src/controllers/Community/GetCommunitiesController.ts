@@ -7,9 +7,7 @@ import { ICommunityResponse } from "../../types/ResponseTypes"
 import { InlineType } from "../../utils/InlineType"
 import { communityIncludeOptions } from "./Utils/CommunityIncludeOptions"
 
-interface ReqBody extends RequestContext {}
-
-export const GetCommunitiesFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
+export const GetCommunitiesFunction = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
   const communities: ICommunity[] = await Community.findMany({ include: communityIncludeOptions(0) })
 
   res.status(201).json(
