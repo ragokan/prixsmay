@@ -4,5 +4,5 @@ import { userSelectOptions } from "../../User/Utils/UserIncludeOptions"
 
 export const communityIncludeOptions = (limit: number = 10): Prisma.CommunityInclude => ({
   users: { select: userSelectOptions },
-  posts: { include: postIncludeOptions, orderBy: { createdAt: "desc" }, take: limit },
+  posts: { include: { ...postIncludeOptions, community: false }, orderBy: { createdAt: "desc" }, take: limit },
 })
