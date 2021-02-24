@@ -1,8 +1,9 @@
-import Joi from "joi";
+import Joi from "joi"
 
 export interface PostBodyType {
-  title: string;
-  content: string;
+  title: string
+  content: string
+  communityId?: number
 }
 
 export const PostValidation = (data: PostBodyType) => {
@@ -15,6 +16,7 @@ export const PostValidation = (data: PostBodyType) => {
       "any.required": "Please provide a content!",
       "string.min": "Please provide a content that longer than 5 letters!",
     }),
-  });
-  return schema.validate(data);
-};
+    communityId: Joi.number().optional(),
+  })
+  return schema.validate(data)
+}
