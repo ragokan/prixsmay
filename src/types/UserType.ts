@@ -1,3 +1,4 @@
+import { ICommunity } from "./CommunityType"
 import { IPost } from "./PostType"
 
 export enum UserRole {
@@ -14,6 +15,7 @@ export interface IUser {
   isActivated: boolean
   profile: Profile | null
   posts?: IPost[]
+  communities?: ICommunity[]
   createdAt: Date
   updatedAt: Date
 }
