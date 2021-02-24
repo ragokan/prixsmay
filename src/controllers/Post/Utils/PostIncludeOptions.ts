@@ -10,6 +10,6 @@ export const postIncludeOptions: Prisma.PostInclude = {
     orderBy: { id: "desc" },
   },
   community: {
-    select: { id: true, description: true, name: true, picture: true, users: { select: { id: true } } },
+    select: { id: true, description: true, name: true, picture: true, members: { select: { id: true } } },
   },
 }

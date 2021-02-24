@@ -49,7 +49,7 @@ model Community {
   name        String
   description String
   picture     String?
-  users       User[]
+  members     User[]
   posts       Post[]
 
   // Utility
