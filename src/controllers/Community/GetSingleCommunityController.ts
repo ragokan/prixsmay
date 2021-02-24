@@ -3,9 +3,11 @@ import { Community } from "../../database"
 import Async from "../../middleware/Async"
 import { ICommunity } from "../../types/CommunityType"
 import { RequestContext, ResponseContext } from "../../types/ExpressTypes"
+import { IPost } from "../../types/PostType"
 import { ICommunityResponse } from "../../types/ResponseTypes"
 import ErrorObject from "../../utils/ErrorObject"
 import { InlineType } from "../../utils/InlineType"
+import { PaginatePosts } from "../Post/Utils/PostPaginateFunction"
 import { communityIncludeOptions } from "./Utils/CommunityIncludeOptions"
 
 interface ReqBody extends RequestContext {
@@ -15,17 +17,33 @@ interface ReqBody extends RequestContext {
   query: {
     limit?: string
     page?: string
+    orderBy?: "newest" | "highest"
   }
 }
 
 export const GetSingleCommunityFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
-  const community: ICommunity | null = await Community.findUnique({
-    where: { id: parseInt(req.params.id) },
-    include: communityIncludeOptions(
-      req.query.limit ? parseInt(req.query.limit) : 10,
-      req.query.page ? parseInt(req.query.page) : 1
-    ),
-  })
+  let community: ICommunity | null
+  const orderBy = req.query.orderBy || "newest"
+  const limit = req.query.limit && parseInt(req.query.limit)
+  const page = req.query.page && parseInt(req.query.page)
+
+  if (orderBy === "newest") {
+    community = await Community.findUnique({
+      where: { id: parseInt(req.params.id) },
+      include: communityIncludeOptions(limit ? limit : 10, page ? page : 1),
+    })
+  } else {
+    community = await Community.findUnique({
+      where: { id: parseInt(req.params.id) },
+      include: communityIncludeOptions(Math.max()),
+    })
+
+    community = {
+      ...(community as any),
+      posts: PaginatePosts<IPost>(community?.posts!),
+    }
+  }
+
   if (!community) return next(new ErrorObject("No community with this id is found!", 404))
 
   res.status(201).json(
