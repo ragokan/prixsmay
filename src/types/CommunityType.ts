@@ -5,7 +5,7 @@ export interface ICommunity {
   id: number
   name: string
   description: string
-  picture: string
+  picture: string | null
   posts?: IPost[]
   users?: IUser[]
   createdAt: Date

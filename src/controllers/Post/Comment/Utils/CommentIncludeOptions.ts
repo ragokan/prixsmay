@@ -1,12 +1,8 @@
 import { Prisma } from "@prisma/client"
-import { userProfileArgs } from "../../../User/Utils/UserIncludeOptions"
+import { userSelectOptions } from "../../../User/Utils/UserIncludeOptions"
 
-const userSelectOptions: Prisma.UserArgs = {
-  select: { id: true, email: true, username: true, profile: userProfileArgs },
-}
-
-export let commentIncludeOptions: Prisma.CommentInclude = {
+export const commentIncludeOptions: Prisma.CommentInclude = {
   votes: true,
-  user: userSelectOptions,
+  user: { select: userSelectOptions },
   comments: true,
 }

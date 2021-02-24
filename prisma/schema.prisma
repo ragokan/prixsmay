@@ -45,10 +45,10 @@ model Profile {
 }
 
 model Community {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   description String
-  picture     String
+  picture     String?
   users       User[]
   posts       Post[]
 

@@ -1,4 +1,5 @@
 import { IComment } from "./CommentType"
+import { ICommunity } from "./CommunityType"
 import { IPost } from "./PostType"
 import { ICommentVote, IVote } from "./VoteType"
 
@@ -23,4 +24,9 @@ export interface ICommentResponse extends IResponse {
 
 export interface IVoteResponse extends IResponse {
   votes?: IVote[] | ICommentVote[]
+}
+
+export interface ICommunityResponse extends IResponse {
+  community?: ICommunity
+  communities?: ICommunity[]
 }
