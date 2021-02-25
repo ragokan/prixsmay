@@ -26,7 +26,7 @@ export const LeaveCommunityFunction = Async(async (req: ReqBody, res: ResponseCo
     data: { members: { disconnect: { id: req.user.id } } },
   })
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<ICommunityResponse>({ message: "You leaved the community successfully!", success: true })
   )
 })

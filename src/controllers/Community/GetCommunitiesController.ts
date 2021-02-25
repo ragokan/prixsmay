@@ -10,7 +10,7 @@ import { communityIncludeOptions } from "./Utils/CommunityIncludeOptions"
 export const GetCommunitiesFunction = Async(async (req: RequestContext, res: ResponseContext, next: NextFunction) => {
   const communities: ICommunity[] = await Community.findMany({ include: communityIncludeOptions(0) })
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<ICommunityResponse>({ message: "Communities are received successfully!", success: true, communities })
   )
 })

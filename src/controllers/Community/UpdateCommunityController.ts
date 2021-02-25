@@ -10,19 +10,22 @@ import { CommunityBodyType, CommunityValidation } from "../../validation/Communi
 import { communityIncludeOptions } from "./Utils/CommunityIncludeOptions"
 
 interface ReqBody extends RequestContext {
+  params: { id: string }
   body: CommunityBodyType
 }
 
-export const CreateCommunityFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
+export const UpdateCommunityFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
   const { error } = CommunityValidation(req.body)
   if (error) return next(new ErrorObject(error.details[0].message, 400))
+  const id = parseInt(req.params.id)
 
-  const community: ICommunity = await Community.create({
+  const community: ICommunity = await Community.update({
+    where: { id },
     data: { ...req.body, name: req.body.name.trim().toLowerCase() },
     include: communityIncludeOptions(),
   })
 
-  res.status(201).json(
-    InlineType<ICommunityResponse>({ message: "Community is created successfully!", success: true, community })
+  res.status(200).json(
+    InlineType<ICommunityResponse>({ message: "Community is updated successfully!", success: true, community })
   )
 })

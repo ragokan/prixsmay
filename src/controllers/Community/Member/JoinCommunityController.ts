@@ -26,7 +26,7 @@ export const JoinCommunityFunction = Async(async (req: ReqBody, res: ResponseCon
     data: { members: { connect: { id: req.user.id } } },
   })
 
-  res.status(201).json(
+  res.status(200).json(
     InlineType<ICommunityResponse>({ message: "You joined the community successfully!", success: true })
   )
 })
