@@ -10,22 +10,10 @@ import { omit } from "lodash"
 import { FindImageName } from "../../utils/FindImageNameRegex"
 import { defaultUserPictureConstants } from "../../constants/CloudinaryConstants"
 import { userIncludeOptions } from "./Utils/UserIncludeOptions"
+import { FileType } from "../../types/FileType"
 
 interface ReqBody extends RequestContext {
-  files: {
-    image: {
-      fieldName: string
-      originalFilename: string
-      path: string
-      headers: {
-        "content-disposition": string
-        "content-type": string
-      }
-      size: number
-      name: string
-      type: string
-    }
-  }
+  files: FileType
 }
 
 export const AddProfileFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {

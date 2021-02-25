@@ -2,6 +2,7 @@ import { NextFunction } from "express"
 import { Community } from "../../database"
 import Async from "../../middleware/Async"
 import { RequestContext, ResponseContext } from "../../types/ExpressTypes"
+import { FileType } from "../../types/FileType"
 import { ICommunityResponse } from "../../types/ResponseTypes"
 import ErrorObject from "../../utils/ErrorObject"
 import { FindImageName } from "../../utils/FindImageNameRegex"
@@ -10,20 +11,7 @@ import { useCloudinary } from "../../utils/UseCloudinary"
 
 interface ReqBody extends RequestContext {
   params: { id: string }
-  files: {
-    image: {
-      fieldName: string
-      originalFilename: string
-      path: string
-      headers: {
-        "content-disposition": string
-        "content-type": string
-      }
-      size: number
-      name: string
-      type: string
-    }
-  }
+  files: FileType
 }
 
 export const UploadCommunityPictureFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
