@@ -46,7 +46,7 @@ model Profile {
 
 model Community {
   id          Int     @id @default(autoincrement())
-  name        String
+  name        String  @unique
   description String
   picture     String?
   members     User[]

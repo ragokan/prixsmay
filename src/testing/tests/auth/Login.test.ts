@@ -48,7 +48,6 @@ describe("Login", () => {
         id: dbUser.id,
         username: user.username,
         email: user.email,
-        type: "user",
       },
     })
   })

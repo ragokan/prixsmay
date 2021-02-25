@@ -44,7 +44,7 @@ export const GetSingleCommunityFunction = Async(async (req: ReqBody, res: Respon
     }
   }
 
-  if (!community) return next(new ErrorObject("No community with this id is found!", 404))
+  if (!community) return next(new ErrorObject("No community is found with this id!", 404))
 
   res.status(200).json(
     InlineType<ICommunityResponse>({ message: "Community is received successfully!", success: true, community })

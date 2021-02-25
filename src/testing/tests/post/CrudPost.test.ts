@@ -61,7 +61,6 @@ describe("Crud On Post", () => {
       },
     })
     expect(data.post.createdAt).toBeDefined()
-    expect(data.post.createdAt).toBeDefined()
     expect(data.post.author).toBeDefined()
   })
 
@@ -115,7 +114,6 @@ describe("Crud On Post", () => {
         content: fakePostToUpdate.content,
       },
     })
-    expect(data.post.createdAt).toBeDefined()
     expect(data.post.createdAt).toBeDefined()
     expect(data.post.author).toBeDefined()
   })

@@ -17,6 +17,9 @@ export const CreateCommunityFunction = Async(async (req: ReqBody, res: ResponseC
   const { error } = CommunityValidation(req.body)
   if (error) return next(new ErrorObject(error.details[0].message, 400))
 
+  const communityCheck = await Community.findFirst({ where: { name: req.body.name.trim().toLowerCase() } })
+  if (communityCheck) return next(new ErrorObject("A community with this name already exists!", 400))
+
   const community: ICommunity = await Community.create({
     data: { ...req.body, name: req.body.name.trim().toLowerCase() },
     include: communityIncludeOptions(),

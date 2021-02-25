@@ -19,6 +19,9 @@ export const UpdateCommunityFunction = Async(async (req: ReqBody, res: ResponseC
   if (error) return next(new ErrorObject(error.details[0].message, 400))
   const id = parseInt(req.params.id)
 
+  const communityCheck = await Community.findUnique({ where: { id } })
+  if (!communityCheck) return next(new ErrorObject("No community is found with this id!", 404))
+
   const community: ICommunity = await Community.update({
     where: { id },
     data: { ...req.body, name: req.body.name.trim().toLowerCase() },
