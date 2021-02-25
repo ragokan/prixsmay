@@ -6,6 +6,7 @@ import { GetSingleCommunityFunction } from "../controllers/Community/GetSingleCo
 import { JoinCommunityFunction } from "../controllers/Community/Member/JoinCommunityController"
 import { LeaveCommunityFunction } from "../controllers/Community/Member/LeaveCommunityController"
 import { UpdateCommunityFunction } from "../controllers/Community/UpdateCommunityController"
+import { UploadCommunityPictureFunction } from "../controllers/Community/UploadCommunityPicture"
 import { AdminRequired, LoginRequired } from "../middleware/Authentication"
 
 const router = express.Router()
@@ -16,6 +17,7 @@ router
   .get(GetSingleCommunityFunction)
   .patch(LoginRequired, AdminRequired, UpdateCommunityFunction)
   .delete(LoginRequired, AdminRequired, DeleteCommunityFunction)
+router.route("/picture/:id").post(LoginRequired, AdminRequired, UploadCommunityPictureFunction)
 router.route("/join/:id").post(LoginRequired, JoinCommunityFunction)
 router.route("/leave/:id").post(LoginRequired, LeaveCommunityFunction)
 
