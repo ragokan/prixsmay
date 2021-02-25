@@ -3,7 +3,7 @@ import fetch from "node-fetch"
 import { testUrl } from "../../utils/TestConstants"
 import { StartTest } from "../../utils/StartTest"
 import { TestAccount } from "../../utils/TestAccount"
-import { CreateFakePost } from "../../utils/CreateTestPost"
+import { CreateFakePost } from "../../utils/CreateFakePost"
 import { IPost } from "../../../types/PostType"
 import { Server } from "http"
 

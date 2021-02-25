@@ -3,7 +3,7 @@ import Joi from "joi"
 export interface CommunityBodyType {
   name: string
   description: string
-  pictureUrl?: string
+  picture?: string
 }
 
 export const CommunityValidation = (data: CommunityBodyType) => {
@@ -16,7 +16,7 @@ export const CommunityValidation = (data: CommunityBodyType) => {
       "any.required": "Please provide a description for your community!",
       "string.min": "Please provide a description for your community!",
     }),
-    pictureUrl: Joi.string().optional(),
+    picture: Joi.string().optional(),
   })
   return schema.validate(data)
 }
