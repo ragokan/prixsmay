@@ -2,7 +2,6 @@ import Joi from "joi"
 
 export interface CommentUpdateBodyType {
   text: string
-  postId: number
 }
 
 export const CommentUpdateValidation = (data: CommentUpdateBodyType) => {

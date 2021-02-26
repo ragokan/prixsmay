@@ -30,3 +30,7 @@ export interface ICommunityResponse extends IResponse {
   community?: ICommunity
   communities?: ICommunity[]
 }
+
+export interface ICheckAuthResponse extends IResponse {
+  isLogged: boolean
+}
