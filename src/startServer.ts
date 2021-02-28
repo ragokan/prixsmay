@@ -14,8 +14,8 @@ export const startServer = async () => {
 
     const app = express()
     app.use(cors({ credentials: true, origin: true }))
-    app.use(express.json())
-    app.use(formData.parse())
+    app.use(express.json({ limit: "50mb" }))
+    app.use(formData.parse({ maxFieldsSize: 999999999 }))
 
     // Routes - Session
     session(app)
