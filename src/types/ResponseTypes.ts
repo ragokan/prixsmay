@@ -34,3 +34,7 @@ export interface ICommunityResponse extends IResponse {
 export interface ICheckAuthResponse extends IResponse {
   isLogged: boolean
 }
+
+export interface IUploadImageResponse extends IResponse {
+  imageUrl: string
+}
