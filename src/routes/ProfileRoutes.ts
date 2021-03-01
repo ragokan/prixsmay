@@ -3,6 +3,6 @@ import { GetPublicProfileFunction } from "../controllers/Profile/GetPublicProfil
 
 const router = express.Router()
 
-router.route("/:id").get(GetPublicProfileFunction)
+router.route("/:username").get(GetPublicProfileFunction)
 
 export default router
