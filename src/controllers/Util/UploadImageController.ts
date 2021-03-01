@@ -5,8 +5,7 @@ import { FileType } from "../../types/FileType"
 import { IUploadImageResponse } from "../../types/ResponseTypes"
 import ErrorObject from "../../utils/ErrorObject"
 import { InlineType } from "../../utils/InlineType"
-import { useCloudinary } from "../../utils/UseCloudinary"
-import fs from "fs"
+import { UploadImage } from "../../utils/UploadImage"
 
 interface ReqBody extends RequestContext {
   files: FileType
@@ -20,11 +19,7 @@ export const UploadImageFunction = Async(async (req: ReqBody, res: ResponseConte
   if (!image || !image.type.includes("image"))
     return next(new ErrorObject("Please provide an image to update your profile!", 400))
 
-  const result = await useCloudinary.uploader.upload(image.path, {
-    unique_filename: true,
-    transformation: { height: 400 },
-  })
-  const imageUrl = result.secure_url
+  const imageUrl = await UploadImage(image.path)
 
   res.status(200).json(
     InlineType<IUploadImageResponse>({

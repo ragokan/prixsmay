@@ -1,16 +1,17 @@
-import { RequestContext, ResponseContext } from "../../types/ExpressTypes"
-import Async from "../../middleware/Async"
 import { NextFunction } from "express"
-import { InlineType } from "../../utils/InlineType"
-import { IUserResponse } from "../../types/ResponseTypes"
-import { useCloudinary } from "../../utils/UseCloudinary"
-import ErrorObject from "../../utils/ErrorObject"
-import { User } from "../../database"
 import { omit } from "lodash"
-import { FindImageName } from "../../utils/FindImageNameRegex"
 import { defaultUserPictureConstants } from "../../constants/CloudinaryConstants"
-import { userIncludeOptions } from "./Utils/UserIncludeOptions"
+import { User } from "../../database"
+import Async from "../../middleware/Async"
+import { RequestContext, ResponseContext } from "../../types/ExpressTypes"
 import { FileType } from "../../types/FileType"
+import { IUserResponse } from "../../types/ResponseTypes"
+import ErrorObject from "../../utils/ErrorObject"
+import { FindImageName } from "../../utils/FindImageNameRegex"
+import { InlineType } from "../../utils/InlineType"
+import { UploadImage } from "../../utils/UploadImage"
+import { useCloudinary } from "../../utils/UseCloudinary"
+import { userIncludeOptions } from "./Utils/UserIncludeOptions"
 
 interface ReqBody extends RequestContext {
   files: FileType
@@ -27,15 +28,12 @@ export const AddProfileFunction = Async(async (req: ReqBody, res: ResponseContex
   if (userCurrentImage && !defaultUserPictureConstants.includes(userCurrentImage))
     await useCloudinary.uploader.destroy(userCurrentImage)
 
-  const result = await useCloudinary.uploader.upload(image.path, {
-    unique_filename: true,
-    transformation: { height: 400 },
-  })
+  const picture = await UploadImage(image.path)
 
   const user = await User.update({
     where: { id: req.session.userId },
     include: userIncludeOptions,
-    data: { profile: { update: { picture: result.secure_url } } },
+    data: { profile: { update: { picture } } },
   })
   const filteredUser = omit(user, ["password", "isActivated"])
 
