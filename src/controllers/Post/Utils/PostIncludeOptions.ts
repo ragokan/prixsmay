@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client"
-import { userSelectOptions } from "../../User/Utils/UserIncludeOptions"
+import { userSelectOptions } from "../../User/Utils/UserSelectOptions"
 import { commentIncludeOptions } from "../Comment/Utils/CommentIncludeOptions"
 
 export const postIncludeOptions: Prisma.PostInclude = {

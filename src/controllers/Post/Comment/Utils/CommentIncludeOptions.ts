@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client"
-import { userSelectOptions } from "../../../User/Utils/UserIncludeOptions"
+import { userSelectOptions } from "../../../User/Utils/UserSelectOptions"
 
 // What a dirty code, right?
 // At the time I am doing this, there are no way to handle multiple nested includes in CommentToComment

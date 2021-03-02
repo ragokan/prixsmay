@@ -8,9 +8,3 @@ export const userIncludeOptions: Prisma.UserInclude = {
   profile: userProfileArgs,
   comments: { include: commentIncludeOptions },
 }
-export const userSelectOptions: Prisma.UserSelect = {
-  id: true,
-  username: true,
-  profile: userProfileArgs,
-  communities: true,
-}
