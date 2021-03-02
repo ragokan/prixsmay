@@ -13,7 +13,6 @@ interface ReqBody extends RequestContext {
 }
 
 export const GetPublicProfileFunction = Async(async (req: ReqBody, res: ResponseContext, next: NextFunction) => {
-  console.log(req.params)
   const user = await User.findUnique({ where: { username: req.params.username }, include: userIncludeOptions })
   if (!user) return next(new ErrorObject("No profile is found with this username!", 404))
 
